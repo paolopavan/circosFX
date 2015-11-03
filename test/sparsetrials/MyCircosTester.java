@@ -111,6 +111,7 @@ public class MyCircosTester {
                 // funziona anche questo:
                 //Circos widget = new Circos(test, null,null);
                 
+                widget.initialize();
                 jfxPanel.setScene(new Scene(widget));
                 
                 Link l1 = new LinkBuilder()
@@ -145,7 +146,7 @@ public class MyCircosTester {
                     widget.addLink(l3);
                     widget.addLink(l4);
                     
-                    //widget.addLink(testLoader.getLinks());
+                    widget.addLink(testLoader.getLinks());
                 } catch (UnconsistentDataException e){
                     throw new Error(e);
                 }

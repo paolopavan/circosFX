@@ -93,7 +93,7 @@ public class Circos extends Pane {
     /**
      * optional, contains links representation
      */
-    private ArrayList<Link> links = new ArrayList();
+    private List<Link> links = new ArrayList();
     /**
      * contains the names of the arcs
      */
@@ -173,7 +173,7 @@ public class Circos extends Pane {
         for (int i=0; i < arcLengths.length; i++) arcNames[i] = "Arc "+ i;
         
         setArcLengths(arcLengths);
-        initialize();
+        initPlot();
         initEffects();
     }
     
@@ -195,8 +195,6 @@ public class Circos extends Pane {
         arcColors = arcCollection.getArcColors();
         
         setArcLengths(arcCollection.getArcLengths());
-        initialize();
-        initEffects();
     }
     
     
@@ -220,9 +218,11 @@ public class Circos extends Pane {
      * @throws circos.widget.UnconsistentDataException 
      */
     public void addLink(Link l) throws UnconsistentDataException{
+        if (radialElements == null) throw new IllegalStateException("Plot not initialized yet");
         this.links.add(l);
         ObservableList<Node> widgetElements = radialElements.getChildren();
         CircosLink circosLink = buildCurve(l);
+        circosLink.setVisible(false);
         widgetElements.add(circosLink);
     }
     /**
@@ -271,10 +271,21 @@ public class Circos extends Pane {
         return (double) x / arcLengthsSum * (2 * PI - gapPortion);
     }
     
+    /**
+     * Initialize the plot. 
+     * Must always be done after construction and before loading links. 
+     * It is not called by constructor to allow further customization of the plot
+     * with setter methods immediately after construction.
+     */
+    public void initialize() {
+        links.clear();
+        initPlot();
+        initEffects();
+    }
 
     
-    private void initialize(){
-        // initialize bindings:
+    private void initPlot(){
+        // initPlot bindings:
         magnificationProperty = new SimpleDoubleProperty(1);
         // binds plot center to the available space in window 
         // (whatever is less between height and width
@@ -323,7 +334,7 @@ public class Circos extends Pane {
         
         ObservableList<Node> widgetElements = radialElements.getChildren();
         
-        // initialize radians arc length
+        // initPlot radians arc length
         double alpha = 0;
         arcStarts = new double[arcLengths.length];
         for (int i=0; i < arcLengths.length; i++){
@@ -332,7 +343,7 @@ public class Circos extends Pane {
             alpha += radiansLength + arcsGap;
         }
         
-        // initialize arcs
+        // initPlot arcs
         for (int i=0; i < arcLengths.length; i++){
             widgetElements.add(buildArc(i));
             if (drawRuler) widgetElements.add(ruler(i));
@@ -517,7 +528,7 @@ public class Circos extends Pane {
      * Moreover, since I need to paint an annulus and I want to use a simple 
      * primitive for speeding draw, the round arc is the only one that has 
      * boundaries that apply to this case.
-     * @return Circle object to be painted as last in the initialize phase
+     * @return Circle object to be painted as last in the initPlot phase
      */
     private Circle cleaner(){
         Circle inbound = new Circle();
