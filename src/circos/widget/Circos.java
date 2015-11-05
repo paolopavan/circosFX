@@ -30,7 +30,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableNumberValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -248,7 +247,7 @@ public class Circos extends Pane {
         if (radialElements == null) throw new IllegalStateException("Plot not initialized yet");
         this.links.add(l);
         ObservableList<Node> widgetElements = radialElements.getChildren();
-        CircosLink circosLink = buildCurve(l);
+        CircosLink circosLink = buildLink(l);
         widgetElements.add(circosLink);
     }
     /**
@@ -264,7 +263,7 @@ public class Circos extends Pane {
         ObservableList<Node> widgetElements = radialElements.getChildren();
         
         for (Link l: links) {
-            CircosLink circosLink = buildCurve(l);
+            CircosLink circosLink = buildLink(l);
             widgetElements.add(circosLink);
         }
     }
@@ -446,7 +445,7 @@ public class Circos extends Pane {
         return g;
     }
     
-    private CircosLink buildCurve(Link l) throws UnconsistentDataException {
+    private CircosLink buildLink(Link l) throws UnconsistentDataException {
         CircosLink curve = new CircosLink();
         curve.setRepresentation(l);
         
