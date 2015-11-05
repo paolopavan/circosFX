@@ -23,12 +23,14 @@ import java.util.List;
 import javafx.animation.RotateTransition;
 import javafx.animation.RotateTransitionBuilder;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableNumberValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -157,6 +159,31 @@ public class Circos extends Pane {
     private double relationIntensityMaximum;
     
     /**
+     * Minimum length allowed for the unit of a ruler. 
+     * below this number of pixels, do not display the minor tick and the ruler numbers
+     * 
+     * Note that changing the plot size (or zooming in) and remaining this value constant 
+     * more elements will be displayed in detail
+     */
+    private final double rulerUnitLengthThreshold = 2.5d;
+    /**
+     * Minimum length allowed for arc or subregion of the arc.
+     * below this number of pixels, do not display the arc member.
+     * 
+     * Note that changing the plot size (or zooming in) and remaining this value constant 
+     * more elements will be displayed in detail
+     */
+    private final double arcLengthThreshold = 0d;
+    /**
+     * Minimum width allowed for arc representation.
+     * Below this number of pixels, do not display the link.
+     * 
+     * Note that changing the plot size (or zooming in) and remaining this value constant 
+     * more elements will be displayed in detail
+     */
+    private final double linkWidthThreshold = 100d;
+    
+    /**
      * Base constructor.
      * It initializes a plot using a simple vector
      * @param arcLengths a vector representing lengths of arcs/chromosomes
@@ -222,7 +249,6 @@ public class Circos extends Pane {
         this.links.add(l);
         ObservableList<Node> widgetElements = radialElements.getChildren();
         CircosLink circosLink = buildCurve(l);
-        circosLink.setVisible(false);
         widgetElements.add(circosLink);
     }
     /**
@@ -373,7 +399,11 @@ public class Circos extends Pane {
     public void doFancyStuffs(){
         rotateTransition.play();
     }
-    
+    /**
+     * draw primitives for a single arc (chromosome)
+     * @param i the arc to be draw
+     * @return 
+     */
     private Group buildArc(int i){
         Group g = new Group();
         ObservableList<Node> members = g.getChildren();
@@ -455,8 +485,13 @@ public class Circos extends Pane {
         arc.centerXProperty().bind(plotCenterBinding);
         arc.centerYProperty().bind(plotCenterBinding);
         arc.radiusXProperty().bind(plotRadiusBinding);
-        arc.radiusYProperty().bind(plotRadiusBinding);        
-
+        arc.radiusYProperty().bind(plotRadiusBinding);  
+        
+        // Visualize element only if it is big enough. Check that: 
+        // radiansLength * plotRadius > threshold;
+        BooleanBinding visibleBinding = Bindings.greaterThan(plotRadiusBinding.multiply(radiansLength), arcLengthThreshold);
+        arc.visibleProperty().bind(visibleBinding);
+        
         // Those methods needs degrees input. 
         // Sorry about that, I realize it only at debug time
         arc.setStartAngle(startAngle * 180 / PI);
@@ -499,6 +534,13 @@ public class Circos extends Pane {
         quad.endYProperty().bind(ySinkBinding);
         quad.controlXProperty().bind(plotCenterBinding);
         quad.controlYProperty().bind(plotCenterBinding.add(linkTension));
+        
+        // Visualize arc only if it links two points that are distant enough. Check that: 
+        //min(distance, 2*PI-distance) * plotRadius > threshold;
+        double distance = abs(endAngle - startAngle);
+        double l = min(distance, 2*PI-distance);
+        BooleanBinding visibleBinding = Bindings.greaterThan(plotRadiusBinding.multiply(l), linkWidthThreshold);
+        quad.visibleProperty().bind(visibleBinding);
         
         return quad;
     }
@@ -584,29 +626,28 @@ public class Circos extends Pane {
         DoubleProperty radiusInternal = new SimpleDoubleProperty(plotRadiusBinding.doubleValue());
         radiusInternal.bind(plotRadiusBinding);
         
-        boolean isMayorTick = true;
+        // Visualize minor tick only if major ticks are distant enough. Check that: 
+        //unitLength * plotRadius > threshold;
+        double unitLength = translate(mayorTickInterval/2);
+        BooleanBinding visibleBinding = Bindings.greaterThan(plotRadiusBinding.multiply(unitLength), rulerUnitLengthThreshold);
+        
+        boolean isMajorTick = true;
         for (int i=0; i < arcLengths[a]; i+=mayorTickInterval/2){
-            if (!useMinorTick && !isMayorTick) continue;
+            if (!useMinorTick && !isMajorTick) continue;
             double tick;
             
             tick = mayorTickLength;
-            if (!isMayorTick) tick = mayorTickLength/2;
-            
-            tick = mayorTickLength;
-            if (!isMayorTick) tick = mayorTickLength/2;
+            if (!isMajorTick) tick = mayorTickLength/2;
             
             DoubleProperty radiusExternal = new SimpleDoubleProperty(
                     plotRadiusBinding.doubleValue() + 
                             rulerDistanceFromArc + tick);
             radiusExternal.bind(plotRadiusBinding.add(rulerDistanceFromArc+tick));
-            
-            
 
             NumberBinding xStartBinding = new CartesianXBinding(radiusInternal, center, alpha, thickness, 0);
             NumberBinding yStartBinding = new CartesianYBinding(radiusInternal,center, alpha, thickness, 0);
             NumberBinding xEndBinding = new CartesianXBinding(radiusExternal,center, alpha, thickness, 0);
             NumberBinding yEndBinding = new CartesianYBinding(radiusExternal, center, alpha, thickness, 0);
-
 
             Line line = new Line();
             line.setStroke(Color.GAINSBORO);
@@ -615,6 +656,7 @@ public class Circos extends Pane {
             line.endXProperty().bind(xEndBinding);
             line.endYProperty().bind(yEndBinding);
             line.setStrokeType(StrokeType.CENTERED);
+            if (!isMajorTick) line.visibleProperty().bind(visibleBinding);
             
             members.add(line);
             
@@ -622,11 +664,12 @@ public class Circos extends Pane {
             t.xProperty().bind(xEndBinding);
             t.yProperty().bind(yEndBinding);
             t.setFont(new Font(6));
+            t.visibleProperty().bind(visibleBinding);
             
-            if (isMayorTick) members.add(t);
+            if (isMajorTick) members.add(t);
             
             alpha += translate(mayorTickInterval/2);
-            isMayorTick = !isMayorTick;
+            isMajorTick = !isMajorTick;
         }
         
         // set arc names
