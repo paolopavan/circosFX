@@ -1,5 +1,5 @@
 #CircosFX
-Chord Diagram / Circos reimplementation in a JavaFX widget for Java applications and GUI interface usage.
+Chord Diagram / Circos reimplementation in a Java (JavaFX) widget for GUI interface usage.
 
 ![alt text](https://github.com/paolopavan/circosFX/blob/master/demo/circos%20widget%202%20borderless.png "Example chart")
 
