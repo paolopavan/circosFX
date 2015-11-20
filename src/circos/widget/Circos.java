@@ -199,8 +199,6 @@ public class Circos extends Pane {
         for (int i=0; i < arcLengths.length; i++) arcNames[i] = "Arc "+ i;
         
         setArcLengths(arcLengths);
-        initPlot();
-        initEffects();
     }
     
     /**
