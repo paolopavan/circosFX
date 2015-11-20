@@ -459,8 +459,13 @@ public class Circos extends Pane {
          * it here rising an exception in case they do not fit the constructed plot
          */
         try {
-            from = arcStarts[l.getSourceArc()] + translate(l.getSourceStart());
-            to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart());
+            // adjustments allow links that describe a interval (start and end coordinates very different)
+            // to be depicted with a drawing centered in the interval.
+            long sourceAdjustment = (l.getSourceEnd()-l.getSourceStart())/2;
+            from = arcStarts[l.getSourceArc()] + translate(l.getSourceStart()+sourceAdjustment);
+            
+            long sinkAdjustment = (l.getSinkEnd()-l.getSinkStart())/2;
+            to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart()+sinkAdjustment);
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             throw new UnconsistentDataException(
                     l.toString()+" is not compatible with declared arc collection"
