@@ -96,6 +96,13 @@ public class Circos extends Pane {
      */
     private List<Link> links = new ArrayList();
     /**
+     * stroke width used to draw links
+     * quad.setStrokeWidth(0.01); // full of links 25000
+     * quad.setStrokeWidth(0.08); // lot of links 4500
+     * quad.setStrokeWidth(1.8); // few links 10
+     */
+    private double strokeWidth = 0.08; 
+    /**
      * contains the names of the arcs
      */
     private String[] arcNames ;
@@ -180,7 +187,7 @@ public class Circos extends Pane {
      * Note that changing the plot size (or zooming in) and remaining this value constant 
      * more elements will be displayed in detail
      */
-    private final double linkWidthThreshold = 100d;
+    private double linkWidthThreshold = 0d;
     
     /**
      * Base constructor.
@@ -191,6 +198,15 @@ public class Circos extends Pane {
      * @param linkEventHandler: Extend LinkEventHandler class to add your application logic. 
      * It can be null if you don't have to manage this event
      */
+    public void setStrokeWidth(double strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    public void setLinkWidthThreshold(double linkWidthThreshold) {
+        this.linkWidthThreshold = linkWidthThreshold;
+    }
+    
+    
     public Circos(long[] arcLengths, EventHandler arcEventHandler, EventHandler linkEventHandler){
         this.arcEventHandler = arcEventHandler;
         this.linkEventHandler = linkEventHandler;
@@ -526,8 +542,12 @@ public class Circos extends Pane {
         
         QuadCurve quad = new QuadCurve();
         quad.setStroke(Color.GREY);
-        quad.setStrokeWidth(0.01);
-        //quad.setStrokeWidth(1);
+        
+        
+        // it could be managed also by a binder
+        quad.setStrokeWidth(strokeWidth); 
+        
+        
         quad.setFill(null);
         
         quad.startXProperty().bind(xSourceBinding);
