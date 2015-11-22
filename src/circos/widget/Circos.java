@@ -480,6 +480,12 @@ public class Circos extends Pane {
             
             long sinkAdjustment = (l.getSinkEnd()-l.getSinkStart())/2;
             to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart()+sinkAdjustment);
+            // this epsilon adjustment is needed to draw self relations. 
+            // A quad curve whit start end at the same point is not drawn.
+            // NOTE: 
+            // epsilon = 0.001 draws a line, the loop is invisible
+            // epsilon = 0.01 visualize a tiny loop, it looks better
+            if (from == to) to+=0.01;
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             throw new UnconsistentDataException(
                     l.toString()+" is not compatible with declared arc collection"
