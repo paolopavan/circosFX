@@ -424,7 +424,7 @@ public class Circos extends Pane {
         double alpha = arcStarts[i];
         double radiansLength = translate(arcLengths[i]);
         
-        CircosArc arc = getArc(alpha, radiansLength);
+        CircosArc arc = drawArc(alpha, radiansLength);
         arc.setRepresentation(arcNames[i]);
         
         // overrides the default color setted by getArc()
@@ -438,7 +438,7 @@ public class Circos extends Pane {
             for (SubRegion r: l) {
                 alpha = arcStarts[i] + translate(r.getStart());
                 radiansLength = translate(r.getEnd()-r.getStart());
-                arc = getArc(alpha, radiansLength);
+                arc = drawArc(alpha, radiansLength);
                 arc.setRepresentation(r.getLabel());
                 
                 Color fadedColor = new Color(
@@ -495,7 +495,7 @@ public class Circos extends Pane {
         if (drawRibbons){
             throw new UnsupportedOperationException("Not supported yet."); 
         } else {
-            quad = getCurve(from, to);
+            quad = drawCurve(from, to);
             curve.getChildren().add(quad);
         }
         curve.setOnMouseClicked(linkEventHandler);
@@ -503,7 +503,7 @@ public class Circos extends Pane {
         return curve;
     }
     
-    private CircosArc getArc(double startAngle, double radiansLength){
+    private CircosArc drawArc(double startAngle, double radiansLength){
         CircosArc arc = new CircosArc();
         
         arc.centerXProperty().bind(plotCenterBinding);
@@ -534,7 +534,7 @@ public class Circos extends Pane {
         return arc;
     }
     
-    private QuadCurve getCurve(double startAngle, double endAngle){
+    private QuadCurve drawCurve(double startAngle, double endAngle){
         // mmm there is something that escapes to me about getting radius back...
         DoubleProperty radius = new SimpleDoubleProperty(plotRadiusBinding.doubleValue());
         radius.bind(plotRadiusBinding);
