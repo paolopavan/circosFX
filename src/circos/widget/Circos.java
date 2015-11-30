@@ -119,11 +119,13 @@ public class Circos extends Pane {
      */
     private double arcsGap = 0.1;
     
+    private double paddingCircleDistance = 50;
+    
     /**
      * gap distance expressed in pixels from arcs crown to circle outside
      * 
      */
-    private int outboundCircleGap = 3;
+    private int boundaryCircleGap = 3;
     
     /**
      * some configuration switches
@@ -330,12 +332,8 @@ public class Circos extends Pane {
         // (whatever is less between height and width
         //plotCenterBinding = Bindings.min(this.heightProperty(), this.widthProperty()).divide(2).multiply(magnificationProperty);
         plotCenterBinding = Bindings.min(this.heightProperty(), this.widthProperty()).divide(2);
-        
-        //plotRadiusBinding = plotCenterBinding.subtract(50).multiply(magnificationProperty);
-        //plotRadiusBinding = plotCenterBinding.subtract(50);
-        plotRadiusBinding = plotCenterBinding;
-        
-        // binds circle border to be proportional to the radius.
+        // plot radius takes less than the space available to allow room for external graphical elements as arc captions
+        plotRadiusBinding = Bindings.subtract(plotCenterBinding,paddingCircleDistance);
         circleThickness.bind(plotCenterBinding.divide(30));
         
         BorderPane widgetPanel = new BorderPane();
@@ -388,8 +386,12 @@ public class Circos extends Pane {
             if (drawRuler) widgetElements.add(ruler(i));
         }
         
-        if (drawOutboundCircle) widgetElements.add(outboundCircle());
+        if (drawOutboundCircle) widgetElements.add(boundaryCircle(boundaryCircleGap, Color.BLACK));
         widgetElements.add(cleaner());
+        // invisible graphic element seted outside of all other elements
+        // to make chart bourdaries regular
+        Circle padder = boundaryCircle(paddingCircleDistance, new Color(0,0,0,0));
+        widgetElements.add(padder);
     }
     
     private void initEffects() {
@@ -577,14 +579,14 @@ public class Circos extends Pane {
      * draws an optional bound circle outside the arcs crown
      * @return 
      */
-    private Circle outboundCircle() {
+    private Circle boundaryCircle(double gap, Color c) {
         Circle outbound = new Circle();
         
         outbound.centerXProperty().bind(plotCenterBinding);
         outbound.centerYProperty().bind(plotCenterBinding);
-        outbound.radiusProperty().bind(plotRadiusBinding.add(outboundCircleGap));
+        outbound.radiusProperty().bind(plotRadiusBinding.add(gap));
         
-        outbound.setStroke(Color.BLACK);        
+        outbound.setStroke(c);        
         
         outbound.setStrokeType(StrokeType.INSIDE);
         outbound.setFill(null);
