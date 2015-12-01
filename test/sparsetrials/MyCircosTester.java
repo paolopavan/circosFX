@@ -106,8 +106,9 @@ public class MyCircosTester {
                 date = new java.util.Date();
                 System.out.println(new Timestamp(date.getTime()));
                 
-                //Circos widget = new Circos(new long[]{34,56,90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
-                Circos widget = new Circos(test, new ArcEventHandler(), new LinkEventHandler());
+                Circos widget = new Circos(new long[]{34,56,90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
+                widget.setStrokeWidth(1.8);
+                //Circos widget = new Circos(test, new ArcEventHandler(), new LinkEventHandler());
                 // funziona anche questo:
                 //Circos widget = new Circos(test, null,null);
                 
@@ -146,7 +147,7 @@ public class MyCircosTester {
                     widget.addLink(l3);
                     widget.addLink(l4);
                     
-                    widget.addLink(testLoader.getLinks());
+                    //widget.addLink(testLoader.getLinks());
                 } catch (UnconsistentDataException e){
                     throw new Error(e);
                 }
