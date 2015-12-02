@@ -301,6 +301,14 @@ public class Circos extends Pane {
         captionLabel.setText(t);
     }
     
+    public String getTitle(){
+        return captionLabel.getText();
+    }
+
+    public NumberBinding getPlotRadiusBinding() {
+        return plotRadiusBinding;
+    }
+    
     
     /**
      * returns the translation in radians of a point projected to an arc
@@ -389,7 +397,7 @@ public class Circos extends Pane {
         if (drawOutboundCircle) widgetElements.add(boundaryCircle(boundaryCircleGap, Color.BLACK));
         widgetElements.add(cleaner());
         // invisible graphic element seted outside of all other elements
-        // to make chart bourdaries regular
+        // to make chart boundaries regular
         Circle padder = boundaryCircle(paddingCircleDistance, new Color(0,0,0,0));
         widgetElements.add(padder);
     }
