@@ -7,6 +7,8 @@
 package circos.gui;
 
 import circos.widget.Circos;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -28,8 +30,10 @@ import javafx.util.Callback;
 
 public class MultiChart extends Pane {
     private final Pagination pagination;
+    private IntegerProperty displayedPage = new SimpleIntegerProperty(0);
     
     public MultiChart(final Circos ... charts){
+        final HBox hbox = new HBox(20);
         pagination = new Pagination(charts.length);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         pagination.setPageFactory(new Callback<Integer, Node>() {
@@ -46,23 +50,24 @@ public class MultiChart extends Pane {
                 return borderPane;
             }
         });
+        pagination.currentPageIndexProperty().bindBidirectional(displayedPage);
         
-        HBox pane = new HBox(20);
-        pane.getChildren().add(pagination);
-        pagination.prefWidthProperty().bind(pane.widthProperty());
+        hbox.getChildren().add(pagination);
         
         for (Circos chart: charts){
-            chart.prefHeightProperty().bind(pane.heightProperty());
-            chart.prefWidthProperty().bind(pane.widthProperty());
+            chart.prefHeightProperty().bind(hbox.heightProperty());
+            chart.prefWidthProperty().bind(hbox.widthProperty());
         }
         
-        pane.prefHeightProperty().bind(this.heightProperty());
-        pane.prefWidthProperty().bind(this.widthProperty());
+        hbox.prefHeightProperty().bind(this.heightProperty());
+        hbox.prefWidthProperty().bind(this.widthProperty());
         
-        this.getChildren().add(pane);
+        this.getChildren().add(hbox);
     }
     
     public void setPage(int page){
         pagination.setCurrentPageIndex(page);
+        displayedPage.set(page);
+        pagination.getPageFactory().call(page);
     }
 }
