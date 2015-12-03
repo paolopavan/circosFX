@@ -13,9 +13,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 
@@ -34,23 +34,26 @@ public class MultiChart extends Pane {
     
     public MultiChart(final Circos ... charts){
         final HBox hbox = new HBox(20);
+        final Font captionFont = new Font(20);
         pagination = new Pagination(charts.length);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         pagination.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
-                BorderPane borderPane = new BorderPane();
-                borderPane.setCenter(charts[pageIndex]);
-                
+                VBox box = new VBox();
+                box.setAlignment(Pos.CENTER);
                 Label label = new Label(charts[pageIndex].getTitle());
-                label.setFont(new Font(20));
+                label.setFont(captionFont);
                 label.setAlignment(Pos.CENTER);
-                label.prefWidthProperty().bind(borderPane.widthProperty());
-                borderPane.setTop(label);
-                return borderPane;
+                label.prefWidthProperty().bind(box.widthProperty());
+
+                box.getChildren().addAll(label, charts[pageIndex]);
+                return box;
             }
         });
         pagination.currentPageIndexProperty().bindBidirectional(displayedPage);
+        // Patch: avoid pagination to spread too much
+        pagination.setMaxWidth(600);
         
         hbox.getChildren().add(pagination);
         
