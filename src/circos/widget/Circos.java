@@ -190,16 +190,7 @@ public class Circos extends Pane {
      * more elements will be displayed in detail
      */
     private double linkWidthThreshold = 0d;
-    
-    /**
-     * Base constructor.
-     * It initializes a plot using a simple vector
-     * @param arcLengths a vector representing lengths of arcs/chromosomes
-     * @param arcEventHandler: Extend ArcEventHandler class to add your application logic. 
-     * It can be null if you don't have to manage this event
-     * @param linkEventHandler: Extend LinkEventHandler class to add your application logic. 
-     * It can be null if you don't have to manage this event
-     */
+
     public void setStrokeWidth(double strokeWidth) {
         this.strokeWidth = strokeWidth;
     }
@@ -207,8 +198,16 @@ public class Circos extends Pane {
     public void setLinkWidthThreshold(double linkWidthThreshold) {
         this.linkWidthThreshold = linkWidthThreshold;
     }
-    
-    
+
+    /**
+     * Base constructor.
+     * It initializes a plot using a simple vector
+     * @param arcLengths a vector representing lengths of arcs/chromosomes
+     * @param arcEventHandler: Extend ArcEventHandler class to add your application logic.
+     * It can be null if you don't have to manage this event
+     * @param linkEventHandler: Extend LinkEventHandler class to add your application logic.
+     * It can be null if you don't have to manage this event
+     */
     public Circos(long[] arcLengths, EventHandler arcEventHandler, EventHandler linkEventHandler){
         this.arcEventHandler = arcEventHandler;
         this.linkEventHandler = linkEventHandler;
@@ -490,8 +489,8 @@ public class Circos extends Pane {
             
             long sinkAdjustment = (l.getSinkEnd()-l.getSinkStart())/2;
             to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart()+sinkAdjustment);
-            // this epsilon adjustment is needed to draw self relations. 
-            // A quad curve whit start end at the same point is not drawn.
+            // the following epsilon adjustment is needed to draw self relations.
+            // A quad curve with start end at the same point is not drawn.
             // NOTE: 
             // epsilon = 0.001 draws a line, the loop is invisible
             // epsilon = 0.01 visualize a tiny loop, it looks better
