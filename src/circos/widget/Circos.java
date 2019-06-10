@@ -152,7 +152,7 @@ public class Circos extends Pane {
     private DoubleProperty circleThickness = new SimpleDoubleProperty(13);
     
     private DoubleProperty linkTension = new SimpleDoubleProperty(0);
-    
+
     /**
      * property to declare if entire regions between dataXstart and dataXend
      * must be drawn as a ribbon. 
@@ -237,8 +237,10 @@ public class Circos extends Pane {
         
         setArcLengths(arcCollection.getArcLengths());
     }
-    
-    
+
+    public void setDrawRibbons(boolean drawRibbons) {
+        this.drawRibbons = drawRibbons;
+    }
 
     final public void setArcLengths(long[] arcLengths) {
         // final method because it is used in constructor
