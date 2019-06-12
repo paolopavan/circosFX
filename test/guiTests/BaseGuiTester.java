@@ -117,11 +117,14 @@ public abstract class BaseGuiTester {
                 .setSinkArc(2)
                 .setSinkStart(0)
                 .createLink();
+        // Ribbon
         Link l3 = new LinkBuilder()
                 .setSourceArc(1)
                 .setSourceStart(28)
+                .setSourceEnd(40)
                 .setSinkArc(3)
                 .setSinkStart(32)
+                .setSinkEnd(50)
                 .createLink();
         Link l4 = new LinkBuilder()
                 .setSourceArc(2)
@@ -129,11 +132,15 @@ public abstract class BaseGuiTester {
                 .setSinkArc(0)
                 .setSinkStart(20)
                 .createLink();
+
+        // Ribbon
         Link l_inverse = new LinkBuilder()
                 .setSourceArc(2)
                 .setSourceStart(50)
+                .setSourceEnd(60)
                 .setSinkArc(2)
                 .setSinkStart(20)
+                .setSinkEnd(40)
                 .createLink();
         Link l_self = new LinkBuilder()
                 .setSourceArc(1)
