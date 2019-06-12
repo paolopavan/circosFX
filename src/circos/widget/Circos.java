@@ -20,6 +20,8 @@
 import static java.lang.Math.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.istack.internal.Nullable;
 import javafx.animation.RotateTransition;
 import javafx.animation.RotateTransitionBuilder;
 import javafx.beans.binding.Bindings;
@@ -473,39 +475,57 @@ public class Circos extends Pane {
     private CircosLink buildLink(Link l) throws UnconsistentDataException {
         CircosLink curve = new CircosLink();
         curve.setRepresentation(l);
-        
-        // whatever we will draw links or ribbons will use a different primitive
-        QuadCurve quad;
-        Path path;
-        double from, to;
-        
+
         /**
-         * since links' configuration is not checked for speed reasons I check
+         * since links' configuration is not checked in advance for speed reasons I check
          * it here rising an exception in case they do not fit the constructed plot
          */
-        try {
-            // adjustments allow links that describe a interval (start and end coordinates very different)
-            // to be depicted with a drawing centered in the interval.
-            long sourceAdjustment = (l.getSourceEnd()-l.getSourceStart())/2;
-            from = arcStarts[l.getSourceArc()] + translate(l.getSourceStart()+sourceAdjustment);
-            
-            long sinkAdjustment = (l.getSinkEnd()-l.getSinkStart())/2;
-            to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart()+sinkAdjustment);
-            // the following epsilon adjustment is needed to draw self relations.
-            // A quad curve with start end at the same point is not drawn.
-            // NOTE: 
-            // epsilon = 0.001 draws a line, the loop is invisible
-            // epsilon = 0.01 visualize a tiny loop, it looks better
-            if (from == to) to+=0.01;
-        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-            throw new UnconsistentDataException(
-                    l.toString()+" is not compatible with declared arc collection"
-            );
-        }
-            
         if (drawRibbons){
-            throw new UnsupportedOperationException("Not supported yet."); 
+            double sourceStartAngle;
+            double sourceEndAngle;
+            double sinkStartAngle;
+            double sinkEndAngle;
+            Path path;
+
+            try {
+                sourceStartAngle = arcStarts[l.getSourceArc()] + translate(l.getSourceStart());
+                sourceEndAngle = arcStarts[l.getSourceArc()] + translate(l.getSourceEnd());
+
+                sinkStartAngle = arcStarts[l.getSinkArc()] + translate(l.getSinkStart());
+                sinkEndAngle = arcStarts[l.getSinkArc()] + translate(l.getSinkEnd());
+            } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                throw new UnconsistentDataException(
+                        l.toString()+" is not compatible with declared arc collection"
+                );
+            }
+            // use arcColors[l.getSourceArc()] instead
+            path = drawRibbon(sourceStartAngle,sourceEndAngle, sinkStartAngle, sinkEndAngle, defaultArcColor);
+            curve.getChildren().add(path);
         } else {
+            double from, to;
+            QuadCurve quad;
+
+            try {
+                // adjustments allow links that describe a interval (start and end coordinates very different)
+                // to be depicted with a drawing centered in the interval.
+                long sourceAdjustment = (l.getSourceEnd()-l.getSourceStart())/2;
+                from = arcStarts[l.getSourceArc()] + translate(l.getSourceStart()+sourceAdjustment);
+
+                long sinkAdjustment = (l.getSinkEnd()-l.getSinkStart())/2;
+                to = arcStarts[l.getSinkArc()] + translate(l.getSinkStart()+sinkAdjustment);
+                // the following epsilon adjustment is needed to draw self relations.
+                // A quad curve with start end at the same point is not drawn.
+                // NOTE:
+                // epsilon = 0.001 draws a line, the loop is invisible
+                // epsilon = 0.01 visualize a tiny loop, it looks better
+                if (from == to) to+=0.01;
+            } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                throw new UnconsistentDataException(
+                        l.toString()+" is not compatible with declared arc collection"
+                );
+            }
+
+
             quad = drawCurve(from, to);
             curve.getChildren().add(quad);
         }
@@ -583,11 +603,75 @@ public class Circos extends Pane {
         
         return quad;
     }
-    
-    /**
-     * draws an optional bound circle outside the arcs crown
-     * @return 
-     */
+
+    private Path drawRibbon(double sourceStartAngle, double sourceEndAngle, double sinkStartAngle, double sinkEndAngle,
+                            @Nullable Color color) {
+        DoubleProperty radius = new SimpleDoubleProperty(plotRadiusBinding.doubleValue());
+        radius.bind(plotRadiusBinding);
+        DoubleProperty center = new SimpleDoubleProperty(plotCenterBinding.doubleValue());
+        center.bind(plotCenterBinding);
+
+        NumberBinding xSourceStartBinding = new CartesianXBinding(radius, center, sourceStartAngle, circleThickness, sourceGapFromArc);
+        NumberBinding ySourceStartBinding = new CartesianYBinding(radius, center, sourceStartAngle, circleThickness, sourceGapFromArc);
+
+        NumberBinding xSourceEndBinding = new CartesianXBinding(radius, center, sourceEndAngle, circleThickness, sourceGapFromArc);
+        NumberBinding ySourceEndBinding = new CartesianYBinding(radius, center, sourceEndAngle, circleThickness, sourceGapFromArc);
+
+        NumberBinding xSinkStartBinding = new CartesianXBinding(radius, center, sinkStartAngle, circleThickness, sinkGapFromArc);
+        NumberBinding ySinkStartBinding = new CartesianYBinding(radius, center, sinkStartAngle, circleThickness, sinkGapFromArc);
+
+        NumberBinding xSinkEndBinding = new CartesianXBinding(radius, center, sinkEndAngle, circleThickness, sinkGapFromArc);
+        NumberBinding ySinkEndBinding = new CartesianYBinding(radius, center, sinkEndAngle, circleThickness, sinkGapFromArc);
+
+
+        Path path = new Path();
+        MoveTo moveTo = new MoveTo();
+        QuadCurveTo quadTo1 = new QuadCurveTo();
+        QuadCurveTo quadTo2 = new QuadCurveTo();
+        ArcTo sourceConnector = new ArcTo();
+        ArcTo sinkConnector = new ArcTo();
+
+
+        quadTo1.controlXProperty().bind(plotCenterBinding);
+        quadTo1.controlYProperty().bind(plotCenterBinding.add(linkTension));
+        quadTo2.controlXProperty().bind(plotCenterBinding);
+        quadTo2.controlYProperty().bind(plotCenterBinding.add(linkTension));
+        sourceConnector.radiusXProperty().bind(plotCenterBinding);
+        sourceConnector.radiusYProperty().bind(plotCenterBinding);
+        sinkConnector.radiusXProperty().bind(plotCenterBinding);
+        sinkConnector.radiusYProperty().bind(plotCenterBinding);
+        sourceConnector.setSweepFlag(true);
+        sinkConnector.setSweepFlag(true);
+
+        moveTo.xProperty().bind(xSourceStartBinding);
+        moveTo.yProperty().bind(ySourceStartBinding);
+
+        quadTo1.xProperty().bind(xSinkEndBinding);
+        quadTo1.yProperty().bind(ySinkEndBinding);
+
+        sinkConnector.xProperty().bind(xSinkStartBinding);
+        sinkConnector.yProperty().bind(ySinkStartBinding);
+
+        quadTo2.xProperty().bind(xSourceEndBinding);
+        quadTo2.yProperty().bind(ySourceEndBinding);
+
+        sourceConnector.xProperty().bind(xSourceStartBinding);
+        sourceConnector.yProperty().bind(ySourceStartBinding);
+
+        path.getElements().add(moveTo);
+        path.getElements().add(quadTo1);
+        path.getElements().add(sinkConnector);
+        path.getElements().add(quadTo2);
+        path.getElements().add(sourceConnector);
+        path.setFill(color);
+
+        return path;
+    }
+
+        /**
+         * draws an optional bound circle outside the arcs crown
+         * @return
+         */
     private Circle boundaryCircle(double gap, Color c) {
         Circle outbound = new Circle();
         
