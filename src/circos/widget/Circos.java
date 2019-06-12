@@ -19,6 +19,7 @@
 
 import static java.lang.Math.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
@@ -215,6 +216,9 @@ public class Circos extends Pane {
         this.linkEventHandler = linkEventHandler;
         
         arcNames = new String[arcLengths.length];
+        arcColors = new Color[arcLengths.length];
+        Arrays.fill(arcColors, defaultArcColor);
+
         for (int i=0; i < arcLengths.length; i++) arcNames[i] = "Arc "+ i;
         
         setArcLengths(arcLengths);
@@ -440,8 +444,7 @@ public class Circos extends Pane {
         CircosArc arc = drawArc(alpha, radiansLength);
         arc.setRepresentation(arcNames[i]);
         
-        // overrides the default color setted by getArc()
-        if (arcColors != null) arc.setStroke(arcColors[i]);
+        arc.setStroke(arcColors[i]);
         
         members.add(arc);
         
@@ -498,8 +501,8 @@ public class Circos extends Pane {
                         l.toString()+" is not compatible with declared arc collection"
                 );
             }
-            // use arcColors[l.getSourceArc()] instead
-            path = drawRibbon(sourceStartAngle,sourceEndAngle, sinkStartAngle, sinkEndAngle, defaultArcColor);
+
+            path = drawRibbon(sourceStartAngle,sourceEndAngle, sinkStartAngle, sinkEndAngle, arcColors[l.getSourceArc()]);
             curve.getChildren().add(path);
         } else {
             double from, to;
@@ -554,9 +557,7 @@ public class Circos extends Pane {
         
         arc.setType(ArcType.ROUND);
         arc.strokeWidthProperty().bind(circleThickness);
-        
-        // set default arc color, it can be overridden by super caller
-        arc.setStroke(defaultArcColor);
+
         arc.setStrokeType(StrokeType.INSIDE);
         arc.setFill(null);
         
