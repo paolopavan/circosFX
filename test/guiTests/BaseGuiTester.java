@@ -103,6 +103,105 @@ public abstract class BaseGuiTester {
             throw new Error(ex);
         }
     }
+
+    void loadMM9ribbons(Circos circos){
+        Link l1 = new LinkBuilder()
+                .setSourceArc(0)
+                .setSourceStart(97195432)
+                .setSourceEnd(197195432)
+                .setSinkArc(3)
+                .setSinkStart(80000000)
+                .setSinkEnd(100000000)
+                .createLink();
+
+        Link l2 = new LinkBuilder()
+                .setSourceArc(2)
+                .setSourceStart(50000000)
+                .setSourceEnd(550000000)
+                .setSinkArc(17)
+                .setSinkStart(90319150)
+                .setSinkEnd(98319150)
+                .createLink();
+
+        Link l3 = new LinkBuilder()
+                .setSourceArc(10)
+                .setSourceStart(60000000)
+                .setSourceEnd(80000000)
+                .setSinkArc(17)
+                .setSinkStart(90319150)
+                .setSinkEnd(98319150)
+                .setSinkEnd(90772031)
+                .createLink();
+
+        Link l4 = new LinkBuilder()
+                .setSourceArc(4)
+                .setSourceStart(52537259)
+                .setSourceEnd(102537259)
+                .setSinkArc(19)
+                .setSinkStart(66650296)
+                .setSinkEnd(106650296)
+                .createLink();
+
+        Link l5 = new LinkBuilder()
+                .setSourceArc(7)
+                .setSourceStart(52537259)
+                .setSourceEnd(66650296)
+                .setSinkArc(18)
+                .setSinkStart(20537259)
+                .setSinkEnd(40650296)
+                .createLink();
+
+        Link l6 = new LinkBuilder()
+                .setSourceArc(8)
+                .setSourceStart(52537259)
+                .setSourceEnd(66650296)
+                .setSinkArc(18)
+                .setSinkStart(20537259)
+                .setSinkEnd(40650296)
+                .createLink();
+
+        Link l7 = new LinkBuilder()
+                .setSourceArc(5)
+                .setSourceStart(120000000)
+                .setSourceEnd(40000000)
+                .setSinkArc(11)
+                .setSinkStart(20000000)
+                .setSinkEnd(100000000)
+                .createLink();
+
+        // inverse ribbon should fold
+        Link l_inverse = new LinkBuilder()
+                .setSourceArc(4)
+                .setSourceStart(52537259)
+                .setSourceEnd(102537259)
+                .setSinkArc(19)
+                .setSinkStart(106650296)
+                .setSinkEnd(66650296)
+                .createLink();
+
+        Link l_self = new LinkBuilder()
+                .setSourceArc(13)
+                .setSourceStart(52537259)
+                .setSourceEnd(66650296)
+                .setSinkArc(13)
+                .setSinkStart(102537259)
+                .setSinkEnd(106650296)
+                .createLink();
+
+        try {
+            circos.addLink(l1);
+            circos.addLink(l2);
+            circos.addLink(l3);
+            circos.addLink(l4);
+            circos.addLink(l5);
+            circos.addLink(l6);
+            circos.addLink(l7);
+            circos.addLink(l_inverse);
+            circos.addLink(l_self);
+        } catch (UnconsistentDataException e){
+            throw new Error(e);
+        }
+    }
     
     void loadLinks(Circos circos) {
         Link l1 = new LinkBuilder()

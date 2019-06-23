@@ -601,7 +601,7 @@ public class Circos extends Pane {
         double l = min(distance, 2*PI-distance);
         BooleanBinding visibleBinding = Bindings.greaterThan(plotRadiusBinding.multiply(l), linkWidthThreshold);
         quad.visibleProperty().bind(visibleBinding);
-        
+
         return quad;
     }
 
@@ -626,6 +626,9 @@ public class Circos extends Pane {
 
 
         Path path = new Path();
+        path.setStroke(Color.GREY);
+        path.setStrokeWidth(strokeWidth);
+
         MoveTo moveTo = new MoveTo();
         QuadCurveTo quadTo1 = new QuadCurveTo();
         QuadCurveTo quadTo2 = new QuadCurveTo();
@@ -664,6 +667,8 @@ public class Circos extends Pane {
         path.getElements().add(sinkConnector);
         path.getElements().add(quadTo2);
         path.getElements().add(sourceConnector);
+
+        path.setFillRule(FillRule.NON_ZERO);
         path.setFill(color);
 
         return path;
