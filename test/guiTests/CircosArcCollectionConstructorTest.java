@@ -17,7 +17,7 @@ import javafx.scene.Scene;
  *
  * @author pavanpa
  */
-public class CircosArcColectionConstructorTest extends BaseGuiTester {
+public class CircosArcCollectionConstructorTest extends BaseGuiTester {
     @Override
     void configureCircos(JFXPanel jfxPanel) {
         ArcCollection mouseGenome = new MouseMM9();
@@ -32,7 +32,7 @@ public class CircosArcColectionConstructorTest extends BaseGuiTester {
     }
     
     public static void main(String[] args){
-        BaseGuiTester me = new CircosArcColectionConstructorTest();
+        BaseGuiTester me = new CircosArcCollectionConstructorTest();
         me.initSwing();
     }
 }
