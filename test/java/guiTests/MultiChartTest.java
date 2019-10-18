@@ -32,6 +32,7 @@ public class MultiChartTest extends BaseGuiTester {
         };
         widgets[0].setTitle("Plot 1");
         widgets[1].setTitle("Plot 2");
+        widgets[1].setDrawRibbons(true);
         widgets[2].setTitle("Plot 3");
         
         for (Circos widget: widgets){
@@ -43,7 +44,7 @@ public class MultiChartTest extends BaseGuiTester {
         p.setScene(new Scene(gui));
         
         // only one is moving... ;-)
-        widgets[1].doFancyStuffs();
+        widgets[0].doFancyStuffs();
     }
     
     public static void main(String[] args){
