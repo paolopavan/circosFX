@@ -78,10 +78,14 @@ public class Link {
     }
     @Override
     public String toString(){
-        return "Link from "+ getSourceArc()+
+        String desc =  "Link from "+ getSourceArc()+
                 ":"+getSourceStart()+"-"+getSourceEnd()+
                 " to "+ getSinkArc()+
                 ":"+getSinkStart()+"-"+getSinkEnd();
+
+        if (isAntisense()) desc += " (antisense)";
+
+        return desc;
     }
     
 }
