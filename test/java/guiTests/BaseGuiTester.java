@@ -114,10 +114,10 @@ public abstract class BaseGuiTester {
         Link l2 = new LinkBuilder()
                 .setSourceArc(2)
                 .setSourceStart(50000000)
-                .setSourceEnd(550000000)
+                .setSourceEnd(140000000)    // TODO: implement a check on congruence of coordinates and arcs?
                 .setSinkArc(17)
-                .setSinkStart(90319150)
-                .setSinkEnd(98319150)
+                .setSinkStart(60319150)
+                .setSinkEnd(68319150)
                 .createLink();
 
         Link l3 = new LinkBuilder()
