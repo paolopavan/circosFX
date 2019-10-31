@@ -1,7 +1,8 @@
 #CircosFX
 Chord Diagram / Circos reimplementation in a Java (JavaFX) widget for GUI interface usage.
 
-![alt text](https://github.com/paolopavan/circosFX/blob/master/demo/main.circos%20widget%202%20borderless.png "Example chart")
+![alt text](./demo/circos_links_mm9.png "Example chart")
+![alt text](./demo/Intra_chromosomal_ribbons.png "Example chart")
 
 
 
