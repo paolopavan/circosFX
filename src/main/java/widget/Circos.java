@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javafx.animation.RotateTransition;
 import javafx.animation.RotateTransitionBuilder;
 import javafx.beans.binding.Bindings;
