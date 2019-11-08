@@ -3,32 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiTests;
+package main.java.widget;
 
+import main.java.BaseGuiTester;
 import main.java.widget.Circos;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import main.java.widget.CircosBasicConstructorTest;
+import org.junit.jupiter.api.Test;
 
 
 /**
  *
  * @author pavanpa
  */
-public class CircosNoEventHandlersTest extends BaseGuiTester{
+public class CircosNoEventHandlersTest extends BaseGuiTester {
 
     @Override
-    void configureCircos(JFXPanel jfxPanel) {
+    public void configureCircos(JFXPanel jfxPanel) throws RuntimeException {
         // no event handlers for this test, must work anyway
-        Circos widget = new Circos(new long[]{34,56,90, 65, 10}, null, null);
+        Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, null, null);
         widget.setStrokeWidth(1);
         widget.initialize();
         loadLinks(widget);
         
         jfxPanel.setScene(new Scene(widget));
     }
-    
-    public static void main(String[] args){
-        guiTests.CircosBasicConstructorTest me = new guiTests.CircosBasicConstructorTest();
+
+    @Test
+    public void test() throws Exception {
+        CircosBasicConstructorTest me = new CircosBasicConstructorTest();
         me.initSwing();
     }
     

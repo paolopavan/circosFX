@@ -1,4 +1,4 @@
-package guiTests;
+package main.java;
 
 import main.java.io.CircosLinksAndBundlesLoader;
 import main.java.models.MouseMM9;
@@ -25,9 +25,8 @@ import javax.swing.UIManager;
  * @author pavanpa
  */
 public abstract class BaseGuiTester {
-    public void initSwing() {
+    public void initSwing() throws Exception {
         SwingUtilities.invokeLater(new Runnable() {
-
             public void run() {
                 try {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -59,7 +58,7 @@ public abstract class BaseGuiTester {
                         configureCircos(jfxPanel);
                     }
                 });
-                
+
                 frame.pack();
                 Dimension d;
                 
@@ -73,14 +72,13 @@ public abstract class BaseGuiTester {
         
     }
     
-    abstract void configureCircos(final JFXPanel p);
+    protected abstract void configureCircos(final JFXPanel p) throws RuntimeException;
     
-    void loadMM9links(Circos circos){
+    protected void loadMM9links(Circos circos){
         final String linksResource = "bundles.txt";
         InputStream linksStream = Thread.currentThread()
             .getContextClassLoader()
             .getResourceAsStream(linksResource);
-
 
         try {
             java.util.Date date = new java.util.Date();
@@ -101,7 +99,7 @@ public abstract class BaseGuiTester {
         }
     }
 
-    void loadMM9ribbons(Circos circos){
+    protected void loadMM9ribbons(Circos circos){
         Link l1 = new LinkBuilder()
                 .setSourceArc(0)
                 .setSourceStart(97195432)
@@ -200,7 +198,7 @@ public abstract class BaseGuiTester {
         }
     }
     
-    void loadLinks(Circos circos) {
+    protected void loadLinks(Circos circos) {
         Link l1 = new LinkBuilder()
                 .setSourceArc(0)
                 .setSourceStart(0)
@@ -258,11 +256,11 @@ public abstract class BaseGuiTester {
         }
     }
     
-    void startIncorporatedAnimation(Circos widget){
+    protected void startIncorporatedAnimation(Circos widget){
         widget.doFancyStuffs();
     }
     
-    void alternateAnimationTest(Circos widget){
+    protected void alternateAnimationTest(Circos widget){
         /*
         MyTransition animation = new MyTransition();
         animation.setNode(widget);
@@ -270,29 +268,4 @@ public abstract class BaseGuiTester {
         */
     }
 }
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author pavanpa
- */
-class MyGuiTester {
-    /**
-     * @param args the command line arguments
-     */
-    
-    private void init(final JPanel panel) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                //
-        }});
-    }
-
-    
-        
-}

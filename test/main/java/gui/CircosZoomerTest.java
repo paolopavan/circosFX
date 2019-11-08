@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiTests;
+package main.java.gui;
 
-import main.java.gui.Trials;
+import main.java.BaseGuiTester;
 import main.java.widget.Circos;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -20,8 +23,8 @@ import javafx.scene.Scene;
 public class CircosZoomerTest extends BaseGuiTester {
 
     @Override
-    void configureCircos(JFXPanel jfxPanel) {
-        Circos widget = new Circos(new long[]{34,56,90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
+    public void configureCircos(JFXPanel jfxPanel) {
+        Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setStrokeWidth(1);
         widget.initialize();
         loadLinks(widget);
@@ -30,10 +33,13 @@ public class CircosZoomerTest extends BaseGuiTester {
         Trials gui = new Trials(widget);
         jfxPanel.setScene(new Scene(gui));
     }
-    
-    public static void main(String[] args){
-        BaseGuiTester me = new CircosZoomerTest();
+
+    @Test
+    public void test() throws Exception {
+        CircosZoomerTest me = new CircosZoomerTest();
         me.initSwing();
+        //TimeUnit.SECONDS.sleep(10);
+        assertTrue(true);
     }
     
 }
