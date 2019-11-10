@@ -42,7 +42,7 @@ public class CircosArcCollectionConstructorTest extends BaseGuiTester {
         try {
             CircosArcCollectionConstructorTest me = new CircosArcCollectionConstructorTest();
             me.initSwing();
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(80);
             assertTrue(true);
         } catch (Exception e) {
             fail();

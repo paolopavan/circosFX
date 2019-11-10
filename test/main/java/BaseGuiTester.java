@@ -75,7 +75,7 @@ public abstract class BaseGuiTester {
     protected abstract void configureCircos(final JFXPanel p) throws RuntimeException;
     
     protected void loadMM9links(Circos circos){
-        final String linksResource = "bundles.txt";
+        final String linksResource = "resources/bundles.txt";
         InputStream linksStream = Thread.currentThread()
             .getContextClassLoader()
             .getResourceAsStream(linksResource);
