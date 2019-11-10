@@ -23,7 +23,7 @@ public class CircosRibbonsTest extends BaseGuiTester {
 
     @Override
     public void configureCircos(JFXPanel jfxPanel) {
-        Circos widget = new Circos(new long[]{34,56,90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
+        Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setDrawRibbons(true);
         widget.setStrokeWidth(1);
         widget.setTitle("This is a test");

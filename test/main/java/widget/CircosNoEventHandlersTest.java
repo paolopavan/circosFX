@@ -5,11 +5,9 @@
  */
 package main.java.widget;
 
-import main.java.BaseGuiTester;
-import main.java.widget.Circos;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
-import main.java.widget.CircosBasicConstructorTest;
+import main.java.BaseGuiTester;
 import org.junit.jupiter.api.Test;
 
 

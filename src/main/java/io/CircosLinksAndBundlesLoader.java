@@ -48,7 +48,6 @@ public class CircosLinksAndBundlesLoader {
         Scanner scanner = new Scanner(is); 
         
         while (scanner.hasNextLine()){
-        //try{ while (true){
             String line = scanner.nextLine();
             if (line.startsWith("#")) continue;
             if (line.isEmpty()) continue;
@@ -89,12 +88,10 @@ public class CircosLinksAndBundlesLoader {
 
             // field[6] is found in bundles and appears similar to:
             // nlinks=6,bsize1=320001,bsize2=800003,bidentity1=1.000000,bidentity2=0.714288,depth1=418,depth2=718,
-            // I should import links strenght from here (maybe from nlinks?)
+            // I should import links strength from here (maybe from nlinks?)
 
             links.add(lb.createLink());
         }
-        //} catch (java.util.NoSuchElementException e){System.out.println("finito");}
-        
     }
 
     public List getLinks() {
