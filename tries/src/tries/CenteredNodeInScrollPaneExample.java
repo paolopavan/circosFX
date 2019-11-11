@@ -1,4 +1,4 @@
-package sparsetrials;
+package tries;
 
 import javafx.application.Application;
 import javafx.application.Platform;

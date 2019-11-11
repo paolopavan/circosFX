@@ -1,10 +1,10 @@
-package sparsetrials;
+package tries;
 
 import javafx.animation.Transition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-class MyTransition extends Transition {
+public class MyTransition extends Transition {
     
     {
         setCycleDuration(Duration.millis(100000));
