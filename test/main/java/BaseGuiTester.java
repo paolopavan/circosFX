@@ -27,6 +27,10 @@ import javax.swing.UIManager;
  */
 public abstract class BaseGuiTester {
     protected final JFXPanel jfxPanel = new JFXPanel();
+    static private int xyIncrement = 250;
+    static private int xyLimit = 3 * xyIncrement;
+    static private int x = 0;
+    static private int y = -1 * xyIncrement;
 
     public void runWidget() throws Exception {
         Circos widget = configureCircos(jfxPanel);
@@ -45,6 +49,9 @@ public abstract class BaseGuiTester {
                 final JFXPanel dummy = new JFXPanel();
                 
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                updateCoordinates();
+                frame.setLocation(x,y);
                 frame.setVisible(true);
                 
                 frame.add(label, BorderLayout.NORTH);
@@ -80,7 +87,15 @@ public abstract class BaseGuiTester {
     }
 
     protected abstract Circos configureCircos(final JFXPanel p) throws RuntimeException;
-    
+
+    private void updateCoordinates() {
+        y += xyIncrement;
+        if (y >= xyLimit) {
+            x += xyIncrement;
+            y = 0;
+        }
+    }
+
     protected void loadMM9links(Circos circos){
         final String linksResource = "resources/bundles.txt";
         InputStream linksStream = Thread.currentThread()
