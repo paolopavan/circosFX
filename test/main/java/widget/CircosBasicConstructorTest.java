@@ -5,6 +5,7 @@
  */
 package main.java.widget;
 
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
@@ -19,7 +20,6 @@ import java.util.concurrent.TimeUnit;
  * @author pavanpa
  */
 public class CircosBasicConstructorTest extends BaseGuiTester {
-
     @Override
     public Circos configureCircos(JFXPanel jfxPanel) {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
@@ -29,6 +29,11 @@ public class CircosBasicConstructorTest extends BaseGuiTester {
         loadLinks(widget);
 
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test

@@ -2,6 +2,7 @@ package main.java;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import main.java.io.CircosLinksAndBundlesLoader;
 import main.java.models.MouseMM9;
 import main.java.widget.Circos;
@@ -33,8 +34,17 @@ public abstract class BaseGuiTester {
     static private int y = -1 * xyIncrement;
     private Dimension d = new Dimension(700, 700);
 
+    public void runGUI() throws Exception {
+        Pane gui = configureGUI(jfxPanel);
+        execThread(gui);
+    }
     public void runWidget() throws Exception {
         Circos widget = configureCircos(jfxPanel);
+        widget.doFancyStuffs();
+        execThread(widget);
+    }
+
+    private void execThread(Pane widget) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -65,7 +75,7 @@ public abstract class BaseGuiTester {
                 Platform.runLater(new Runnable() {
                 @Override
                     public void run() {
-                        startWidget(widget);
+                        jfxPanel.setScene(new Scene(widget));
                     }
                 });
 
@@ -76,12 +86,8 @@ public abstract class BaseGuiTester {
         });
     }
 
-    public void startWidget(final Circos widget) {
-        jfxPanel.setScene(new Scene(widget));
-        startIncorporatedAnimation(widget);
-    }
-
     protected abstract Circos configureCircos(final JFXPanel p) throws RuntimeException;
+    protected abstract Pane configureGUI(final JFXPanel p) throws RuntimeException;
 
     private void updateCoordinates() {
         y += xyIncrement;
@@ -271,10 +277,6 @@ public abstract class BaseGuiTester {
         } catch (UnconsistentDataException e){
             throw new Error(e);
         }
-    }
-    
-    protected void startIncorporatedAnimation(Circos widget){
-        widget.doFancyStuffs();
     }
     
     protected void alternateAnimationTest(Circos widget){

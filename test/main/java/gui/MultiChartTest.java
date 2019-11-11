@@ -2,6 +2,7 @@ package main.java.gui;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.widget.Circos;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultiChartTest extends BaseGuiTester {
     @Override
-    public Circos configureCircos(JFXPanel p) {
+    protected Circos configureCircos(JFXPanel p) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Pane configureGUI(JFXPanel p) {
         Circos[] widgets = new Circos[] {
                 new Circos(new long[]{34, 56, 90, 65, 10},null,null),
                 new Circos(new long[]{34, 56, 90, 200, 10},null,null),
@@ -29,24 +35,17 @@ class MultiChartTest extends BaseGuiTester {
             loadLinks(widget);
         }
         MultiChart gui = new MultiChart(widgets);
-        p.setScene(new Scene(gui));
 
         // only one is moving... ;-)
-        widgets[0].doFancyStuffs();
+        widgets[1].doFancyStuffs();
 
-        return widgets[0];
+        return gui;
     }
 
     @Test
-    public void test() {
-        try {
-            MultiChartTest me = new MultiChartTest();
-            me.runWidget();
-            TimeUnit.SECONDS.sleep(10);
-        } catch (Exception e) {
-            fail();
-        }
-        assertTrue(true);
+    public void test() throws Exception {
+        runGUI();
+        TimeUnit.SECONDS.sleep(10);
     }
 
 }

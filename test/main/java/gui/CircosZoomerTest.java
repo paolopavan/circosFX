@@ -5,6 +5,7 @@
  */
 package main.java.gui;
 
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.widget.Circos;
 import main.java.widget.eventHandlers.ArcEventHandler;
@@ -21,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author pavanpa
  */
 public class CircosZoomerTest extends BaseGuiTester {
-
     @Override
     public Circos configureCircos(JFXPanel jfxPanel) {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
@@ -34,6 +34,11 @@ public class CircosZoomerTest extends BaseGuiTester {
         jfxPanel.setScene(new Scene(gui));
 
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test

@@ -5,6 +5,7 @@
  */
 package main.java.widget;
 
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
@@ -32,6 +33,11 @@ public class CircosRibbonsTest extends BaseGuiTester {
         loadLinks(widget);
 
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test

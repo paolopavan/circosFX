@@ -5,6 +5,7 @@
  */
 package main.java.widget;
 
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.models.MouseMM9;
 import main.java.widget.eventHandlers.ArcEventHandler;
@@ -27,12 +28,17 @@ public class CircosArcCollectionConstructorTest extends BaseGuiTester {
     public Circos configureCircos(JFXPanel jfxPanel) throws RuntimeException {
         ArcCollection mouseGenome = new MouseMM9();
         Circos widget = new Circos(mouseGenome, new ArcEventHandler(), new LinkEventHandler());
-                
+
         widget.setStrokeWidth(0.01);
         widget.initialize();
         loadMM9links(widget);
 
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test

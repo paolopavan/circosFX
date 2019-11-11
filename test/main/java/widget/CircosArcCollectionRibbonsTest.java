@@ -5,6 +5,7 @@
  */
 package main.java.widget;
 
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.models.MouseMM9;
 import main.java.widget.eventHandlers.ArcEventHandler;
@@ -31,6 +32,11 @@ public class CircosArcCollectionRibbonsTest extends BaseGuiTester {
         loadMM9ribbons(widget);
         
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test

@@ -6,6 +6,7 @@
 package main.java.widget;
 
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,11 @@ public class CircosNoEventHandlersTest extends BaseGuiTester {
         loadLinks(widget);
         
         return widget;
+    }
+
+    @Override
+    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+        return null;
     }
 
     @Test
