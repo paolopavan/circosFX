@@ -31,6 +31,7 @@ public abstract class BaseGuiTester {
     static private int xyLimit = 3 * xyIncrement;
     static private int x = 0;
     static private int y = -1 * xyIncrement;
+    private Dimension d = new Dimension(700, 700);
 
     public void runWidget() throws Exception {
         Circos widget = configureCircos(jfxPanel);
@@ -52,8 +53,7 @@ public abstract class BaseGuiTester {
 
                 updateCoordinates();
                 frame.setLocation(x,y);
-                frame.setVisible(true);
-                
+
                 frame.add(label, BorderLayout.NORTH);
                 JPanel mainPanel = new JPanel();
                 frame.add(mainPanel);
@@ -70,12 +70,7 @@ public abstract class BaseGuiTester {
                 });
 
                 frame.pack();
-                Dimension d;
-                
-                d = new Dimension(220, 240);
-                d = new Dimension(700, 700);
                 frame.setSize(d);
-                
                 frame.setVisible(true);
             }
         });
