@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import main.java.BaseGuiTester;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 
 /**
  *
@@ -18,20 +20,20 @@ import org.junit.jupiter.api.Test;
 public class CircosNoEventHandlersTest extends BaseGuiTester {
 
     @Override
-    public void configureCircos(JFXPanel jfxPanel) throws RuntimeException {
+    public Circos configureCircos(JFXPanel jfxPanel) throws RuntimeException {
         // no event handlers for this test, must work anyway
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, null, null);
         widget.setStrokeWidth(1);
         widget.initialize();
         loadLinks(widget);
         
-        jfxPanel.setScene(new Scene(widget));
+        return widget;
     }
 
     @Test
     public void test() throws Exception {
-        CircosBasicConstructorTest me = new CircosBasicConstructorTest();
-        me.initSwing();
+        initSwing();
+        TimeUnit.SECONDS.sleep(5);
     }
     
 }

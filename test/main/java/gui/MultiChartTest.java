@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultiChartTest extends BaseGuiTester {
     @Override
-    public void configureCircos(JFXPanel p) {
+    public Circos configureCircos(JFXPanel p) {
         Circos[] widgets = new Circos[] {
                 new Circos(new long[]{34, 56, 90, 65, 10},null,null),
                 new Circos(new long[]{34, 56, 90, 200, 10},null,null),
@@ -33,6 +33,8 @@ class MultiChartTest extends BaseGuiTester {
 
         // only one is moving... ;-)
         widgets[0].doFancyStuffs();
+
+        return widgets[0];
     }
 
     @Test

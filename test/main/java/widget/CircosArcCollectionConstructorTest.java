@@ -10,7 +10,6 @@ import main.java.models.MouseMM9;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -25,28 +24,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CircosArcCollectionConstructorTest extends BaseGuiTester {
 
     @Override
-    public void configureCircos(JFXPanel jfxPanel) throws RuntimeException {
+    public Circos configureCircos(JFXPanel jfxPanel) throws RuntimeException {
         ArcCollection mouseGenome = new MouseMM9();
         Circos widget = new Circos(mouseGenome, new ArcEventHandler(), new LinkEventHandler());
                 
         widget.setStrokeWidth(0.01);
         widget.initialize();
         loadMM9links(widget);
-        
-        jfxPanel.setScene(new Scene(widget));
-        startIncorporatedAnimation(widget);
+
+        return widget;
     }
 
     @Test
-    public void test() {
-        try {
-            CircosArcCollectionConstructorTest me = new CircosArcCollectionConstructorTest();
-            me.initSwing();
-            TimeUnit.SECONDS.sleep(80);
-            assertTrue(true);
-        } catch (Exception e) {
-            fail();
-            //throw e;
-        }
+    public void test() throws Exception {
+        initSwing();
+        TimeUnit.SECONDS.sleep(40);
     }
 }

@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CircosZoomerTest extends BaseGuiTester {
 
     @Override
-    public void configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setStrokeWidth(1);
         widget.initialize();
@@ -32,6 +32,8 @@ public class CircosZoomerTest extends BaseGuiTester {
         
         Trials gui = new Trials(widget);
         jfxPanel.setScene(new Scene(gui));
+
+        return widget;
     }
 
     @Test

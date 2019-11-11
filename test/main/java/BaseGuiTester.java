@@ -1,5 +1,7 @@
 package main.java;
 
+import javafx.application.Platform;
+import javafx.scene.Scene;
 import main.java.io.CircosLinksAndBundlesLoader;
 import main.java.models.MouseMM9;
 import main.java.widget.Circos;
@@ -12,7 +14,6 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.ParseException;
 
-import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +26,10 @@ import javax.swing.UIManager;
  * @author pavanpa
  */
 public abstract class BaseGuiTester {
+    protected final JFXPanel jfxPanel = new JFXPanel();
+
     public void initSwing() throws Exception {
+        Circos widget = configureCircos(jfxPanel);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -48,14 +52,13 @@ public abstract class BaseGuiTester {
                 frame.add(mainPanel);
                 mainPanel.setLayout(new BorderLayout());
                 
-                final JFXPanel jfxPanel = new JFXPanel();
                 mainPanel.add(jfxPanel);
                 mainPanel.setVisible(true);
                 
                 Platform.runLater(new Runnable() {
                 @Override
                     public void run() {
-                        configureCircos(jfxPanel);
+                        startWidget(widget);
                     }
                 });
 
@@ -69,10 +72,14 @@ public abstract class BaseGuiTester {
                 frame.setVisible(true);
             }
         });
-        
     }
-    
-    protected abstract void configureCircos(final JFXPanel p) throws RuntimeException;
+
+    public void startWidget(final Circos widget) {
+        jfxPanel.setScene(new Scene(widget));
+        startIncorporatedAnimation(widget);
+    }
+
+    protected abstract Circos configureCircos(final JFXPanel p) throws RuntimeException;
     
     protected void loadMM9links(Circos circos){
         final String linksResource = "resources/bundles.txt";

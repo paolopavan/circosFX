@@ -13,6 +13,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 
 /**
  *
@@ -20,7 +22,7 @@ import org.junit.jupiter.api.Test;
  */
 public class CircosArcCollectionRibbonsTest extends BaseGuiTester {
     @Override
-    public void configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) {
         ArcCollection mouseGenome = new MouseMM9();
         Circos widget = new Circos(mouseGenome, new ArcEventHandler(), new LinkEventHandler());
         widget.setDrawRibbons(true);
@@ -29,13 +31,12 @@ public class CircosArcCollectionRibbonsTest extends BaseGuiTester {
         widget.initialize();
         loadMM9ribbons(widget);
         
-        jfxPanel.setScene(new Scene(widget));
-        startIncorporatedAnimation(widget);
+        return widget;
     }
 
     @Test
     public void test() throws Exception {
-        BaseGuiTester me = new CircosArcCollectionRibbonsTest();
-        me.initSwing();
+        initSwing();
+        TimeUnit.SECONDS.sleep(5);
     }
 }

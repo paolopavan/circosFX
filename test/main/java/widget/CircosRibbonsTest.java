@@ -12,6 +12,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 
@@ -22,26 +24,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CircosRibbonsTest extends BaseGuiTester {
 
     @Override
-    public void configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setDrawRibbons(true);
         widget.setStrokeWidth(1);
         widget.setTitle("This is a test");
         widget.initialize();
         loadLinks(widget);
-        
-        jfxPanel.setScene(new Scene(widget));
-        startIncorporatedAnimation(widget);
+
+        return widget;
     }
 
     @Test
-    public void test() {
-        try {
-            BaseGuiTester me = new CircosRibbonsTest();
-            me.initSwing();
-        } catch (Exception e) {
-            fail();
-        }
+    public void test() throws Exception {
+        initSwing();
+        TimeUnit.SECONDS.sleep(5);
     }
     
 }
