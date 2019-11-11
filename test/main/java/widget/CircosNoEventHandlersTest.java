@@ -6,7 +6,6 @@
 package main.java.widget;
 
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
 import main.java.BaseGuiTester;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +31,7 @@ public class CircosNoEventHandlersTest extends BaseGuiTester {
 
     @Test
     public void test() throws Exception {
-        initSwing();
+        runWidget();
         TimeUnit.SECONDS.sleep(5);
     }
     

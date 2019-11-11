@@ -39,7 +39,7 @@ public class CircosZoomerTest extends BaseGuiTester {
     @Test
     public void test() throws Exception {
         CircosZoomerTest me = new CircosZoomerTest();
-        me.initSwing();
+        me.runWidget();
         //TimeUnit.SECONDS.sleep(10);
         assertTrue(true);
     }

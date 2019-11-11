@@ -9,7 +9,6 @@ import main.java.BaseGuiTester;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -37,7 +36,7 @@ public class CircosRibbonsTest extends BaseGuiTester {
 
     @Test
     public void test() throws Exception {
-        initSwing();
+        runWidget();
         TimeUnit.SECONDS.sleep(5);
     }
     

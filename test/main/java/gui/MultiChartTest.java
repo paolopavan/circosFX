@@ -41,7 +41,7 @@ class MultiChartTest extends BaseGuiTester {
     public void test() {
         try {
             MultiChartTest me = new MultiChartTest();
-            me.initSwing();
+            me.runWidget();
             TimeUnit.SECONDS.sleep(10);
         } catch (Exception e) {
             fail();

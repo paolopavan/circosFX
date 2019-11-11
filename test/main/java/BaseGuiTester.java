@@ -28,7 +28,7 @@ import javax.swing.UIManager;
 public abstract class BaseGuiTester {
     protected final JFXPanel jfxPanel = new JFXPanel();
 
-    public void initSwing() throws Exception {
+    public void runWidget() throws Exception {
         Circos widget = configureCircos(jfxPanel);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

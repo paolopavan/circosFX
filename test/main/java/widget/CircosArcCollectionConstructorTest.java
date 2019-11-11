@@ -37,7 +37,7 @@ public class CircosArcCollectionConstructorTest extends BaseGuiTester {
 
     @Test
     public void test() throws Exception {
-        initSwing();
+        runWidget();
         TimeUnit.SECONDS.sleep(40);
     }
 }
