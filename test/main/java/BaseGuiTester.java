@@ -22,6 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 /**
  *
  * @author pavanpa
@@ -34,12 +37,20 @@ public abstract class BaseGuiTester {
     static private int y = -1 * xyIncrement;
     private Dimension d = new Dimension(700, 700);
 
+    Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread th, Throwable ex) {
+            fail("Exception caught while running widget");
+        }
+    };
+
     public void runGUI() throws Exception {
         Pane gui = configureGUI(jfxPanel);
+        assertNotNull(gui);
         execThread(gui);
     }
     public void runWidget() throws Exception {
         Circos widget = configureCircos(jfxPanel);
+        assertNotNull(widget);
         widget.doFancyStuffs();
         execThread(widget);
     }
@@ -72,12 +83,14 @@ public abstract class BaseGuiTester {
                 mainPanel.add(jfxPanel);
                 mainPanel.setVisible(true);
                 
-                Platform.runLater(new Runnable() {
+                Thread t = new Thread() {
                 @Override
                     public void run() {
                         jfxPanel.setScene(new Scene(widget));
                     }
-                });
+                };
+                t.setUncaughtExceptionHandler(h);
+                Platform.runLater(t);
 
                 frame.pack();
                 frame.setSize(d);
