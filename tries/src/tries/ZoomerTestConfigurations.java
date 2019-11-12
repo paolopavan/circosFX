@@ -49,8 +49,8 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Paolo Pavan
  */
-public class Trials extends Pane{
-    public Trials(Circos chart){
+public class ZoomerTestConfigurations extends Pane{
+    public ZoomerTestConfigurations(Circos chart){
         try8(chart);
     }
     /**

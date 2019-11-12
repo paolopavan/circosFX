@@ -10,8 +10,6 @@ import main.java.widget.Circos;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-
 
 
 /**
@@ -32,7 +30,7 @@ public class CircosZoomerTest extends BaseGuiTester {
         loadLinks(widget);
         widget.doFancyStuffs();
 
-        Trials gui = new Trials(widget);
+        ZoomerTestConfigurations gui = new ZoomerTestConfigurations(widget);
 
         return gui;
     }
