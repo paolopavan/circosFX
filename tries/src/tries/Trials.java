@@ -24,7 +24,7 @@
  * @author Paolo Pavan
  */
  
-package main.java.gui;
+package tries;
 
 import main.java.widget.Circos;
 import javafx.beans.value.ChangeListener;
@@ -51,7 +51,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class Trials extends Pane{
     public Trials(Circos chart){
-        try1(chart);
+        try8(chart);
     }
     /**
      * non funziona. main.circos si adatta allo spazio disponibile e visualizza un titolo
