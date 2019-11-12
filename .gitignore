@@ -1,6 +1,0 @@
-dist/
-build/
-out/
-nbproject/private/
-.gitignore
-!/.gitignore
