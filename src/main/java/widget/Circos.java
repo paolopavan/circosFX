@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 import javafx.animation.RotateTransition;
-import javafx.animation.RotateTransitionBuilder;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.DoubleBinding;
@@ -410,15 +409,13 @@ public class Circos extends Pane {
     }
     
     private void initEffects() {
-        rotateTransition = RotateTransitionBuilder.create()
-                .node(radialElements)
-                .duration(Duration.seconds(6))
-                .fromAngle(0)
-                .toAngle(720)
-                .cycleCount(2)
-                .autoReverse(true)
-                .build();
-        
+        rotateTransition = new RotateTransition();
+        rotateTransition.setNode(radialElements);
+        rotateTransition.setDuration(Duration.seconds(6));
+        rotateTransition.setFromAngle(0);
+        rotateTransition.setToAngle(720);
+        rotateTransition.setCycleCount(2);
+        rotateTransition.setAutoReverse(true);
     }
     
     public void doFancyStuffs(int n){
