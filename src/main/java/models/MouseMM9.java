@@ -28,6 +28,6 @@
  */
 public class MouseMM9 extends ModelOrganismTemplate {
     public MouseMM9() {
-        super("/main/resources/karyotype.mouse.mm9.txt");
+        super("/resources/karyotype.mouse.mm9.txt");
     }
 }

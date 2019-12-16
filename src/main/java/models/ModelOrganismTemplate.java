@@ -37,7 +37,7 @@ import main.java.widget.SubRegion;
  */
 public abstract class ModelOrganismTemplate implements ArcCollection {
     static final Log LOG = LogFactory.getLog(ModelOrganismTemplate.class);
-    final String colorsResource = "/main/resources/colors.ucsc.conf";
+    final String colorsResource = "/resources/colors.ucsc.conf";
     /**
      * ArcNames
      */

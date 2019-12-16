@@ -27,7 +27,7 @@
 public class HumanHG18 extends ModelOrganismTemplate {
 
     public HumanHG18() {
-        super("/main/resources/karyotype.human.hg18.txt");
+        super("/resources/karyotype.human.hg18.txt");
     }
 
 }
