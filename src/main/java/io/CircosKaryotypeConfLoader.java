@@ -64,9 +64,10 @@ public class CircosKaryotypeConfLoader {
             if (line.isEmpty()) continue;
 
             String[] fields = line.split(fieldSeparator);
-            if (fields.length > 7) 
+            if (fields.length != 7)
                 throw new ParseException(
-                        "Malformed Karyotype specification. Line with more than 7 fields met in:\n"+line,
+                        "Malformed Karyotype specification. Line with unexpected number of fields (should be 7) met in:\n"
+                                +line,
                         nthOccurrence(line, fieldSeparator, 7)
                 );
             
