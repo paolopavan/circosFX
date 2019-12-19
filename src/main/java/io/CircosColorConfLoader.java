@@ -44,6 +44,10 @@ public class CircosColorConfLoader {
 
                 if (line.startsWith("#")) continue;
                 if (line.isEmpty()) continue;
+                // char ( is found in color lists that are still not supported
+                if (line.contains("(")) continue;
+                // information on hierarchical inclusion of color definition is built in
+                if (line.startsWith("<<include")) continue;
                 
                 // normalize color ID, it seems they are case insensitive
                 line = line.toLowerCase();

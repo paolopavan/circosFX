@@ -101,6 +101,11 @@ public class CircosKaryotypeConfLoader {
                         "Invalid chromosome coordinates (fields 5 or 6) specified in:\n"+line,
                         nthOccurrence(line, fieldSeparator, 6)
                 );
+            } catch (NullPointerException e) {
+                throw new ParseException(
+                        "Invalid chromosome name found (field 1) in:\n"+line,
+                        nthOccurrence(line, fieldSeparator, 1)
+                );
             }
         }
         // translate cytogenetics band data structure in one compatible with others

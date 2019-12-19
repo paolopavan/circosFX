@@ -37,7 +37,12 @@ import main.java.widget.SubRegion;
  */
 public abstract class ModelOrganismTemplate implements ArcCollection {
     static final Log LOG = LogFactory.getLog(ModelOrganismTemplate.class);
-    final String colorsResource = "/resources/colors.ucsc.conf";
+    private final String[] colorsResources = {
+            "/resources/colors.brewer.conf",
+            "/resources/colors.ucsc.conf",
+            "/resources/colors.conf"
+
+    };
     /**
      * ArcNames
      */
@@ -54,25 +59,34 @@ public abstract class ModelOrganismTemplate implements ArcCollection {
     public ModelOrganismTemplate(String karyotypeResource) {
         InputStream karyotypeStream = getClass()
                 .getResourceAsStream(karyotypeResource);
-        
-        InputStream colorResourceStream = getClass()
-                .getResourceAsStream(colorsResource);
-        
-        String debugDetailString = "color resource path "+colorsResource;
-        if (colorResourceStream==null) debugDetailString += " and stream is null";
+
+        InputStream[] colorResourceStreams = new InputStream[colorsResources.length];
+        String debugDetailString = "";
+        int n = 0;
+
+        for (String colorsResource: colorsResources) {
+            colorResourceStreams[n] = getClass()
+                    .getResourceAsStream(colorsResource);
+
+            debugDetailString = "color resource path " + colorsResource + " ";
+            if (colorResourceStreams[n] == null) debugDetailString += " (has not been loaded) ";
+            n++;
+        }
         
         try {
-            colorDatabase = new CircosColorConfLoader(colorResourceStream).getColorDatabase();
-            
+            colorDatabase = new CircosColorConfLoader(colorResourceStreams).getColorDatabase();
+
+            debugDetailString = karyotypeResource;
+
             CircosKaryotypeConfLoader loader = new CircosKaryotypeConfLoader(karyotypeStream, colorDatabase);
             chromosomeNames = loader.getChromosomeNames();
             chromosomeLengths = loader.getChromosomeLengths();
             chromosomeColorNames = loader.getChromosomeColorNames();
             cytogeneticBands = loader.getCytogeneticBands();
-            
+
         } catch (Exception e){
             throw new IllegalStateException("Resource files corrupted, this should actually never happen "
-                    + "with prepared configurations. I cannot continue.\nReason:"+ debugDetailString +
+                    + "with prepared configurations. I cannot continue.\nReason: "+ debugDetailString + " " +
                     e.getMessage());
         }
     }
