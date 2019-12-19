@@ -2,7 +2,7 @@
  *                    CircosFX development code
  *
  * This code may be freely distributed and modified under the
- * terms of the GNU General Public Licence v3.  This should
+ * terms of the GNU General Public Licence v2.  This should
  * be distributed with the code.  If you do not have a copy,
  * see:
  *
@@ -25,9 +25,9 @@
  * @author Paolo Pavan
  */
 public class HumanHG18 extends ModelOrganismTemplate {
-
+    
     public HumanHG18() {
-        super("/resources/karyotype.human.hg18.txt");
+        super("/resources/karyotype/karyotype.human.hg18.txt");
     }
 
 }

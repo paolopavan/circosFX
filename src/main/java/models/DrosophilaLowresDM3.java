@@ -24,10 +24,10 @@
  * 
  * @author Paolo Pavan
  */
-public class MouseMM9 extends ModelOrganismTemplate {
+public class DrosophilaLowresDM3 extends ModelOrganismTemplate {
     
-    public MouseMM9() {
-        super("/resources/karyotype/karyotype.mouse.mm9.txt");
+    public DrosophilaLowresDM3() {
+        super("/resources/karyotype/karyotype.drosophilaLowres.dm3.txt");
     }
 
 }

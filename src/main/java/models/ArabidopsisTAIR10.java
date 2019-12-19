@@ -24,10 +24,10 @@
  * 
  * @author Paolo Pavan
  */
-public class MouseMM9 extends ModelOrganismTemplate {
+public class ArabidopsisTAIR10 extends ModelOrganismTemplate {
     
-    public MouseMM9() {
-        super("/resources/karyotype/karyotype.mouse.mm9.txt");
+    public ArabidopsisTAIR10() {
+        super("/resources/karyotype/karyotype.arabidopsis.tair10.txt");
     }
 
 }

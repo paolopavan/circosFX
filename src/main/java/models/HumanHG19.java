@@ -24,10 +24,10 @@
  * 
  * @author Paolo Pavan
  */
-public class MouseMM9 extends ModelOrganismTemplate {
+public class HumanHG19 extends ModelOrganismTemplate {
     
-    public MouseMM9() {
-        super("/resources/karyotype/karyotype.mouse.mm9.txt");
+    public HumanHG19() {
+        super("/resources/karyotype/karyotype.human.hg19.txt");
     }
 
 }

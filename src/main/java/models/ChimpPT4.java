@@ -24,10 +24,10 @@
  * 
  * @author Paolo Pavan
  */
-public class MouseMM9 extends ModelOrganismTemplate {
+public class ChimpPT4 extends ModelOrganismTemplate {
     
-    public MouseMM9() {
-        super("/resources/karyotype/karyotype.mouse.mm9.txt");
+    public ChimpPT4() {
+        super("/resources/karyotype/karyotype.chimp.pt4.txt");
     }
 
 }

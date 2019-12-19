@@ -10,24 +10,20 @@
  *
  * Copyright for this code is held jointly by Paolo Pavan and 
  * individual authors that may want to contribute. These should 
- * be listed in @author doc comments.
+ * be listed in  doc comments.
  *
  */
- 
- package main.java.models;
 
-/**
- * Designed by Paolo Pavan
- * You may want to find my contacts on Github and LinkedIn for code info 
- * or discuss major changes.
- * https://github.com/paolopavan
- * 
- * @author Paolo Pavan
- */
-public class MouseMM9 extends ModelOrganismTemplate {
-    
-    public MouseMM9() {
-        super("/resources/karyotype/karyotype.mouse.mm9.txt");
+package main.java.models;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class HumanHG18Test {
+    @Test
+    public void HumanHG18Test() {
+        HumanHG18 test = new HumanHG18();
+        assertNotNull(test);
     }
-
 }
