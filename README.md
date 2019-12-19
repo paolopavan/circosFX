@@ -1,9 +1,70 @@
 #CircosFX
-Chord Diagram / Circos reimplementation in a Java (JavaFX) widget for GUI interface usage.
+###Chord Diagram / Circos reimplementation in a JavaFX widget for GUI interface usage.
+
+This is a Java reimplementation of the well known plot by Martin Krzywinski (http://mkweb.bcgsc.ca/). The original Perl 
+program is available at http://circos.ca . This one doesn't aim to be a replacement of that wonderful piece of software 
+but wants to provide an interactive and animated plot to be included in Graphical User Interfaces for Java programs.  
+
 
 ![alt text](./demo/circos_links_mm9.png "Example plot")
 ![alt text](./demo/Intra_chromosomal_ribbons.png "Example plot")
 
+#### Api
+I focused very much on usability of this software. You will quickly obtain a chart in two steps:
+1. initialization: you construct the plot, arcs (borders) will be defined at this time.
+2. loading links: you load relations among arcs.
+
+In the step number 1 you use one of the Circos class constructors, which allows you to specify a vector of arc lengths 
+or an ArcCollection object. You will also need to specify two EventHandler to associate actions to clicks but it is not
+compulsory, you can also specify null.
+
+An ArcCollection object is a complete pre built configuration representing well known genomes. 
+Here a list of available classes:
+* ArabidopsisTAIR10
+* ChimpPT4
+* DrosophilaHiresDM3
+* DrosophilaLowresDM3
+* HumanHG16
+* HumanHG17
+* HumanHG18
+* HumanHG19
+* HumanHG38
+* MouseMM9
+* MouseMM10
+* RatRN4
+* Rm3
+
+##### Example:
+`Circos widget = new Circos(new MouseMM9(), new ArcEventHandler(), new LinkEventHandler());`
+
+`Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, null, null);`
+
+In the step number 2 you will load links, i.e. relations, connection between two arcs. 
+Just use the provided builder as below to provide all information needed.
+
+Such relations may be drawn as links or ribbons. 
+The former are thin lines that connect the median point of the two interval described, 
+the latter are bands that cover the whole intervals.
+When you want to work with ribbons, specify:
+`widget.setDrawRibbons(true);`
+
+When you want to adjust thickness of the link, specify:
+`widget.setStrokeWidth(0.5);` 
+
+##### Example:
+```
+Link l1 = new LinkBuilder()
+                 .setSourceArc(0)
+                 .setSourceStart(97195432)
+                 .setSourceEnd(197195432)
+                 .setSinkArc(3)
+                 .setSinkStart(80000000)
+                 .setSinkEnd(100000000)
+                 .createLink();
+
+circos.addLink(l1)
+```
+ 
 ####Build and Test
 This distribution includes Gradle for building and testing which is very easy to try.
 Just use:
