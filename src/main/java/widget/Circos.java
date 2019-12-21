@@ -119,7 +119,7 @@ public class Circos extends Pane {
     /**
      * gap distance expressed in radians between two adjacent arcs
      */
-    private double arcsGap = 0.1;
+    private double arcsGap = 0.05;
     
     private double paddingCircleDistance = 50;
     
