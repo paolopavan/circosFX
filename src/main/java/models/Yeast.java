@@ -13,17 +13,21 @@
  * be listed in @author doc comments.
  *
  */
+ 
+ package main.java.models;
 
-package main.java.models;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class DrosophilaLowresDM3Test {
-    @Test
-    public void DrosophilaLowresDM3Test() {
-        DrosophilaLowresDM3 test = new DrosophilaLowresDM3();
-        assertNotNull(test);
+/**
+ * Designed by Paolo Pavan
+ * You may want to find my contacts on Github and LinkedIn for code info 
+ * or discuss major changes.
+ * https://github.com/paolopavan
+ * 
+ * @author Paolo Pavan
+ */
+public class Yeast extends ModelOrganismTemplate {
+    
+    public Yeast() {
+        super("/resources/karyotype/karyotype.yeast.txt");
     }
+
 }

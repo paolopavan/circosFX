@@ -27,7 +27,7 @@
 public class DrosophilaLowresDM3 extends ModelOrganismTemplate {
     
     public DrosophilaLowresDM3() {
-        super("/resources/karyotype/karyotype.drosophilaLowres.dm3.txt");
+        super("/resources/karyotype/karyotype.drosophila.dm3.lowres.txt");
     }
 
 }

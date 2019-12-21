@@ -10,7 +10,7 @@
  *
  * Copyright for this code is held jointly by Paolo Pavan and 
  * individual authors that may want to contribute. These should 
- * be listed in  doc comments.
+ * be listed in @author doc comments.
  *
  */
 

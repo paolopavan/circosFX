@@ -20,10 +20,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DrosophilaLowresDM3Test {
+class DrosophilaHiresDM6Test {
     @Test
-    public void DrosophilaLowresDM3Test() {
-        DrosophilaLowresDM3 test = new DrosophilaLowresDM3();
+    public void DrosophilaHiresDM6Test() {
+        DrosophilaHiresDM6 test = new DrosophilaHiresDM6();
         assertNotNull(test);
     }
 }

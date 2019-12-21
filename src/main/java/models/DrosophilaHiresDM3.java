@@ -27,7 +27,7 @@
 public class DrosophilaHiresDM3 extends ModelOrganismTemplate {
     
     public DrosophilaHiresDM3() {
-        super("/resources/karyotype/karyotype.drosophilaHires.dm3.txt");
+        super("/resources/karyotype/karyotype.drosophila.dm3.hires.txt");
     }
 
 }

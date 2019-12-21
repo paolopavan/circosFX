@@ -78,6 +78,8 @@ public class CircosColorConfLoader {
                 }
             }
         }
+        // Add a n/a color, basically for DM6 genome bands which requires it
+        colors.put("n/a", colors.get("dgrey"));
     }
     
     public HashMap<String,Color> getColorDatabase(){
