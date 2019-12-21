@@ -14,7 +14,7 @@
  *
  */
  
- package main.java.models;
+ package main.java.templates;
 
 import main.java.io.CircosColorConfLoader;
 import main.java.io.CircosKaryotypeConfLoader;

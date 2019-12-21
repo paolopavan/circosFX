@@ -14,7 +14,7 @@
  *
  */
  
- package main.java.io;
+ package main.java.templates;
 
 import main.java.widget.ArcCollection;
 

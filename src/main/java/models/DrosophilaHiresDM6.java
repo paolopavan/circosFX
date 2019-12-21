@@ -16,6 +16,8 @@
  
  package main.java.models;
 
+import main.java.templates.ModelOrganismTemplate;
+
 /**
  * Designed by Paolo Pavan
  * You may want to find my contacts on Github and LinkedIn for code info 
