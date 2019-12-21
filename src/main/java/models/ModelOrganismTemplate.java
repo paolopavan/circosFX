@@ -40,8 +40,8 @@ public abstract class ModelOrganismTemplate implements ArcCollection {
     private final String[] colorsResources = {
             "/resources/colors.brewer.conf",
             "/resources/colors.ucsc.conf",
-            "/resources/colors.conf"
-
+            "/resources/colors.conf",
+            "/resources/colors.extension.conf"
     };
     /**
      * ArcNames

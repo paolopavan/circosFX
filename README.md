@@ -24,6 +24,8 @@ Here a list of available classes:
 * ChimpPT4
 * DrosophilaHiresDM3
 * DrosophilaLowresDM3
+* DrosophilaHiresDM6
+* DrosophilaLowresDM6
 * HumanHG16
 * HumanHG17
 * HumanHG18
@@ -32,9 +34,18 @@ Here a list of available classes:
 * MouseMM9
 * MouseMM10
 * RatRN4
-* Rm3
 
-##### Example:
+And more, from still in progress assemblies:
+* Oryzasativa
+* Sorghum
+* Yeast
+* Zeamays
+* Cat
+* Cow
+* Dog
+* Horse
+
+##### Examples:
 `Circos widget = new Circos(new MouseMM9(), new ArcEventHandler(), new LinkEventHandler());`
 
 `Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, null, null);`

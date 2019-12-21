@@ -24,7 +24,9 @@ class MultiChartTest extends BaseGuiTester {
                 new Circos(new DrosophilaHiresDM6(),null,null),
                 new Circos(new DrosophilaLowresDM3(),null,null),
                 new Circos(new Yeast(),null,null),
-                new Circos(new Sorghum(),null,null)
+                new Circos(new Sorghum(),null,null),
+                new Circos(new Dog(),null,null),
+                new Circos(new Dog3_1(),null,null)
         };
         widgets[0].setTitle("Drosophila DM6 (Hi-Res)");
         widgets[1].setTitle("Drosophila DM3 (Low-Res)");
