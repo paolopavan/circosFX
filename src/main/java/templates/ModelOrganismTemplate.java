@@ -24,7 +24,6 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import main.java.widget.ArcCollection;
 import main.java.widget.SubRegion;
 
 /**

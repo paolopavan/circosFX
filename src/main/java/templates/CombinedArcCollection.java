@@ -16,8 +16,6 @@
  
  package main.java.templates;
 
-import main.java.widget.ArcCollection;
-
 /**
  * Utility class used to combine in on collection several others
  *

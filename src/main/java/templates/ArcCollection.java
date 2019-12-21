@@ -14,10 +14,11 @@
  *
  */
  
- package main.java.widget;
+ package main.java.templates;
 
 import java.util.List;
 import javafx.scene.paint.Color;
+import main.java.widget.SubRegion;
 
 /**
  * Designed by Paolo Pavan
@@ -45,10 +46,10 @@ public interface ArcCollection {
 	 */
 	List<SubRegion> getSubregions(int arc);
         
-        /**
-         * 
-         * @return an array of color objects to be used to paint arcs
-         */
-        Color[] getArcColors();
+	/**
+	 *
+	 * @return an array of color objects to be used to paint arcs
+	 */
+	Color[] getArcColors();
 
 }

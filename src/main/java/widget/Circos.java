@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import main.java.templates.ArcCollection;
 import org.jetbrains.annotations.Nullable;
 import javafx.animation.RotateTransition;
 import javafx.beans.binding.Bindings;

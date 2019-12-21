@@ -8,6 +8,7 @@ package main.java.widget;
 import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.models.MouseMM9;
+import main.java.templates.ArcCollection;
 import main.java.widget.eventHandlers.ArcEventHandler;
 import main.java.widget.eventHandlers.LinkEventHandler;
 import javafx.embed.swing.JFXPanel;
