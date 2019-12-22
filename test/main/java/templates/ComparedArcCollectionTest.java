@@ -55,7 +55,7 @@ class ComparedArcCollectionTest {
         );
 
         assertEquals(dm2l, test.getSubregions(2).size());
-        assertEquals(chr4, test.getSubregions(14).size());
+        assertEquals(chr4, test.getSubregions(13).size());
     }
 
     @Test

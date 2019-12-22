@@ -74,13 +74,13 @@ public class ComparedArcCollection implements ArcCollection {
 		int modelNumber = 0;
 		int arcSum = models[0].getArcLengths().length;
 		int pad = 0;
-		while (arc > arcSum) {
+		while (arc >= arcSum) {
 			modelNumber++;
 			pad = arcSum;
 			arcSum += models[modelNumber].getArcLengths().length;
 		}
 
-		return models[modelNumber].getSubregions(arc - pad - 1);
+		return models[modelNumber].getSubregions(arc - pad);
 	}
 
 	@Override
