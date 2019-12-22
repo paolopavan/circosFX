@@ -29,27 +29,67 @@ public class CircosComparedArcCollectionTest extends BaseGuiTester {
 
         Link l1 = new LinkBuilder()
                 .setSourceArc(0)
-                .setSinkArc(0 + dm6.getArcLengths().length)
+                .setSinkArc(1 + dm3.getArcLengths().length )
                 .setSourceStart(0)
                 .setSourceEnd(dm3.getArcLengths()[0])
                 .setSinkStart(0)
-                .setSinkEnd(dm6.getArcLengths()[0])
+                .setSinkEnd(dm6.getArcLengths()[1])
+                .createLink();
+        Link l2 = new LinkBuilder()
+                .setSourceArc(1)
+                .setSinkArc(3 + dm3.getArcLengths().length )
+                .setSourceStart(0)
+                .setSourceEnd(dm3.getArcLengths()[1])
+                .setSinkStart(0)
+                .setSinkEnd(dm6.getArcLengths()[3])
+                .createLink();
+        Link l3 = new LinkBuilder()
+                .setSourceArc(2)
+                .setSinkArc(4 + dm3.getArcLengths().length )
+                .setSourceStart(0)
+                .setSourceEnd(dm3.getArcLengths()[2])
+                .setSinkStart(0)
+                .setSinkEnd(dm6.getArcLengths()[4])
+                .createLink();
+        Link l4 = new LinkBuilder()
+                .setSourceArc(3)
+                .setSinkArc(5 + dm3.getArcLengths().length )
+                .setSourceStart(0)
+                .setSourceEnd(dm3.getArcLengths()[3])
+                .setSinkStart(0)
+                .setSinkEnd(dm6.getArcLengths()[5])
+                .createLink();
+        Link l5 = new LinkBuilder()
+                .setSourceArc(4)
+                .setSinkArc(6 + dm3.getArcLengths().length )
+                .setSourceStart(0)
+                .setSourceEnd(dm3.getArcLengths()[4])
+                .setSinkStart(0)
+                .setSinkEnd(dm6.getArcLengths()[6])
+                .createLink();
+        Link l6 = new LinkBuilder()
+                .setSourceArc(5)
+                .setSinkArc(7 + dm3.getArcLengths().length )
+                .setSourceStart(0)
+                .setSourceEnd(dm3.getArcLengths()[5])
+                .setSinkStart(0)
+                .setSinkEnd(dm6.getArcLengths()[7])
                 .createLink();
 
-        widget.addLink(l1);
+        widget.addLink(l1, l2, l3, l4, l5, l6);
 
         return widget;
     }
 
     @Override
-    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+    protected Pane configureGUI(JFXPanel p) throws Exception {
         return null;
     }
 
     @Test
     public void test() throws Exception {
         runWidget();
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(105);
     }
 
 }
