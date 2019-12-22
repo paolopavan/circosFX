@@ -99,8 +99,8 @@ public abstract class BaseGuiTester {
         });
     }
 
-    protected abstract Circos configureCircos(final JFXPanel p) throws RuntimeException;
-    protected abstract Pane configureGUI(final JFXPanel p) throws RuntimeException;
+    protected abstract Circos configureCircos(final JFXPanel p) throws Exception;
+    protected abstract Pane configureGUI(final JFXPanel p) throws Exception;
 
     private void updateCoordinates() {
         y += xyIncrement;
@@ -135,7 +135,7 @@ public abstract class BaseGuiTester {
         }
     }
 
-    protected void loadMM9ribbons(Circos circos){
+    protected void loadMM9ribbons(Circos circos) throws UnconsistentDataException {
         Link l1 = new LinkBuilder()
                 .setSourceArc(0)
                 .setSourceStart(97195432)
@@ -219,22 +219,20 @@ public abstract class BaseGuiTester {
                 .setSinkEnd(106650296)
                 .createLink();
 
-        try {
-            circos.addLink(l1);
-            circos.addLink(l2);
-            circos.addLink(l3);
-            circos.addLink(l4);
-            circos.addLink(l5);
-            circos.addLink(l6);
-            circos.addLink(l7);
-            circos.addLink(l_inverse);
-            circos.addLink(l_self);
-        } catch (UnconsistentDataException e){
-            throw new Error(e);
-        }
+
+        circos.addLink(l1);
+        circos.addLink(l2);
+        circos.addLink(l3);
+        circos.addLink(l4);
+        circos.addLink(l5);
+        circos.addLink(l6);
+        circos.addLink(l7);
+        circos.addLink(l_inverse);
+        circos.addLink(l_self);
+
     }
     
-    protected void loadLinks(Circos circos) {
+    protected void loadLinks(Circos circos) throws UnconsistentDataException {
         Link l1 = new LinkBuilder()
                 .setSourceArc(0)
                 .setSourceStart(0)
@@ -279,17 +277,14 @@ public abstract class BaseGuiTester {
                 .setSinkStart(20)
                 .createLink();
 
-        try {
 
-            circos.addLink(l1);
-            circos.addLink(l2);
-            circos.addLink(l3);
-            circos.addLink(l4);
-            circos.addLink(l_inverse);
-            circos.addLink(l_self);
-        } catch (UnconsistentDataException e){
-            throw new Error(e);
-        }
+        circos.addLink(l1);
+        circos.addLink(l2);
+        circos.addLink(l3);
+        circos.addLink(l4);
+        circos.addLink(l_inverse);
+        circos.addLink(l_self);
+
     }
     
     protected void alternateAnimationTest(Circos widget){

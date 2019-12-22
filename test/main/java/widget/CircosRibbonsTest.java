@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CircosRibbonsTest extends BaseGuiTester {
 
     @Override
-    public Circos configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) throws Exception {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setDrawRibbons(true);
         widget.setStrokeWidth(1);
@@ -36,7 +36,7 @@ public class CircosRibbonsTest extends BaseGuiTester {
     }
 
     @Override
-    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+    protected Pane configureGUI(JFXPanel p) throws Exception {
         return null;
     }
 

@@ -1,7 +1,6 @@
 package main.java.gui;
 
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import main.java.BaseGuiTester;
 import main.java.models.*;
@@ -10,16 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MultiChartTest extends BaseGuiTester {
     @Override
-    protected Circos configureCircos(JFXPanel p) throws RuntimeException {
+    protected Circos configureCircos(JFXPanel p) throws Exception {
         return null;
     }
 
     @Override
-    public Pane configureGUI(JFXPanel p) {
+    public Pane configureGUI(JFXPanel p) throws Exception {
         Circos[] widgets = new Circos[] {
                 new Circos(new DrosophilaHiresDM6(),null,null),
                 new Circos(new DrosophilaLowresDM3(),null,null),

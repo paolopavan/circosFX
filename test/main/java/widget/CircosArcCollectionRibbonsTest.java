@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CircosArcCollectionRibbonsTest extends BaseGuiTester {
     @Override
-    public Circos configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) throws Exception {
         ArcCollection mouseGenome = new MouseMM9();
         Circos widget = new Circos(mouseGenome, new ArcEventHandler(), new LinkEventHandler());
         widget.setDrawRibbons(true);
@@ -36,7 +36,7 @@ public class CircosArcCollectionRibbonsTest extends BaseGuiTester {
     }
 
     @Override
-    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+    protected Pane configureGUI(JFXPanel p) throws Exception {
         return null;
     }
 

@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CircosArcCollectionConstructorTest extends BaseGuiTester {
 
     @Override
-    public Circos configureCircos(JFXPanel jfxPanel) throws RuntimeException {
+    public Circos configureCircos(JFXPanel jfxPanel) throws Exception {
         ArcCollection mouseGenome = new MouseMM9();
         Circos widget = new Circos(mouseGenome, new ArcEventHandler(), new LinkEventHandler());
 
@@ -38,7 +38,7 @@ public class CircosArcCollectionConstructorTest extends BaseGuiTester {
     }
 
     @Override
-    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+    protected Pane configureGUI(JFXPanel p) throws Exception {
         return null;
     }
 

@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CircosBasicConstructorTest extends BaseGuiTester {
     @Override
-    public Circos configureCircos(JFXPanel jfxPanel) {
+    public Circos configureCircos(JFXPanel jfxPanel) throws Exception {
         Circos widget = new Circos(new long[]{34, 56, 90, 65, 10}, new ArcEventHandler(), new LinkEventHandler());
         widget.setStrokeWidth(1);
         widget.setTitle("This is a test");
@@ -32,7 +32,7 @@ public class CircosBasicConstructorTest extends BaseGuiTester {
     }
 
     @Override
-    protected Pane configureGUI(JFXPanel p) throws RuntimeException {
+    protected Pane configureGUI(JFXPanel p) throws Exception {
         return null;
     }
 
