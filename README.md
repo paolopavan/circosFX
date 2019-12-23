@@ -1,5 +1,6 @@
 #CircosFX
-###Chord Diagram / Circos reimplementation in a JavaFX widget for GUI interface usage.
+
+##Chord Diagram / Circos reimplementation in a JavaFX widget for GUI interface usage.
 
 This is a Java reimplementation of the well known plot by Martin Krzywinski (http://mkweb.bcgsc.ca/). The original Perl 
 program is available at http://circos.ca . This one doesn't aim to be a replacement of that wonderful piece of software 
