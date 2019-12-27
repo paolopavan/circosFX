@@ -1,14 +1,15 @@
-#CircosFX
+# CircosFX
 
-##Chord Diagram / Circos reimplementation in a JavaFX widget for GUI interface usage.
+## Chord Diagram / Circos reimplementation in a JavaFX widget for GUI interface usage.
 
 This is a Java reimplementation of the well known plot by Martin Krzywinski (http://mkweb.bcgsc.ca/). The original Perl 
 program is available at http://circos.ca . This one doesn't aim to be a replacement of that wonderful piece of software 
 but wants to provide an interactive and animated plot to be included in Graphical User Interfaces for Java programs.  
 
 
-![alt text](./demo/circos_links_mm9.png "Example plot")
-![alt text](./demo/Intra_chromosomal_ribbons.png "Example plot")
+![Circos Plot on MM9 genome](./demo/circos_links_mm9.png "Example plot")
+
+![Circos Plot using ribbons](./demo/Intra_chromosomal_ribbons.png "Example plot")
 
 #### Api
 I focused very much on usability of this software. You will quickly obtain a chart in two steps:
@@ -77,11 +78,11 @@ Link l1 = new LinkBuilder()
 circos.addLink(l1)
 ```
  
-####Build and Test
+#### Build and Test
 This distribution includes Gradle for building and testing which is very easy to try.
 Just use:
 
-`./gradlew build`
+`./gradlew jar`
 [gradlew.bat on windows]
 
 This will build a directory (build/libs) containing a jar package managing all needed dependencies.
@@ -93,8 +94,8 @@ this will trigger unit tests including some GUI integration tests that will also
 of the package capabilities. 
 
 
-####_Licensing_
-I allow this work to be used free of charge under the license below but I _require_ that you notify me 
+#### _Licensing_
+I allow this work to be used free of charge under the license below but I __require__ that you notify me 
 dropping a message using my linkedin profile for whatever use you do of the software.
 
 I have licensed my work with GPLv2. I know this is quite restrictive and I'm evaluating different solutions. 
